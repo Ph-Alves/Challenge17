@@ -2,8 +2,24 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## macOS
+.DS_Store
+
 ## User settings
 xcuserdata/
+
+## Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
+
+## Xcode Patch
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
 
 ## Obj-C/Swift specific
 *.hmap
@@ -27,7 +43,7 @@ playground.xcworkspace
 #
 # Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
 # hence it is not needed unless you have added a package configuration file to your project
-# .swiftpm
+.swiftpm/
 
 .build/
 
@@ -49,6 +65,10 @@ playground.xcworkspace
 
 Carthage/Build/
 
+# Accio dependency management
+Dependencies/
+.accio/
+
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo.
@@ -60,3 +80,28 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Code Injection
+#
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+
+iOSInjectionProject/
+
+# Build products
+build/
+DerivedData/
+
+# Crashlytics
+Crashlytics.framework
+Fabric.framework
+
+# Environment / secrets
+.env
+.env.local
+*.xcconfig.local
+
+# Editors
+.vscode/
+.idea/
+*.swp
