@@ -1,22 +1,37 @@
 # This workflow will build a Swift project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
-name: Swift
-
+name: CI
 on:
-  push:
-    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches:
+      - main
+      - develop
 
 jobs:
-  build:
-
-    runs-on: macos-latest
-
+  build-and-test:
+    runs-on: macos-26
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      - uses: actions/checkout@v4
+
+      # # Cache do DerivedData — evita recompilar tudo do zero
+      # - name: Cache DerivedData
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/Library/Developer/Xcode/DerivedData
+      #     key: ${{ runner.os }}-deriveddata-${{ hashFiles('**/*.xcodeproj/project.pbxproj') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-deriveddata-
+
+      # Build + Test em um único comando
+      - name: Build & Test
+        run: |
+          xcodebuild test \
+            -project Challenge17/Challenge17.xcodeproj \
+            -scheme Challenge17 \
+            -destination 'platform=macOS' \
+            -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
+            -parallel-testing-enabled YES \
+            -maximum-parallel-testing-workers 2 \
+            -jobs $(sysctl -n hw.logicalcpu) \
+            CODE_SIGNING_ALLOWED=NO
