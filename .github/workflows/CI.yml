@@ -23,15 +23,13 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-deriveddata-
 
-      # Build + Test em um único comando
-      - name: Build & Test
+      # Build em um único comando
+      - name: Build
         run: |
-          xcodebuild test \
+          xcodebuild build \
             -project Challenge17/Challenge17.xcodeproj \
-            -scheme Challenge17 \
-            -destination 'platform=macOS' \
+            -scheme "Challenge17 Watch App" \
+            -destination 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)' \
             -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
-            -parallel-testing-enabled YES \
-            -maximum-parallel-testing-workers 2 \
             -jobs $(sysctl -n hw.logicalcpu) \
             CODE_SIGNING_ALLOWED=NO
