@@ -55,9 +55,30 @@
 		EFBAFEB630338017009B0AF4 /* Challenge17 Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Challenge17 Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				View/GameView.swift,
+			);
+			target = EFBAFEAB30338017009B0AF4 /* Challenge17 Watch AppTests */;
+		};
+		A013B8E03033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				View/GameView.swift,
+			);
+			target = EFBAFEB530338017009B0AF4 /* Challenge17 Watch AppUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */,
+				A013B8E03033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppUITests" target */,
+			);
 			path = "Challenge17 Watch App";
 			sourceTree = "<group>";
 		};
@@ -454,7 +475,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29HC4SA3R9;
+				DEVELOPMENT_TEAM = 379RD95483;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
@@ -476,7 +497,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
@@ -487,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29HC4SA3R9;
+				DEVELOPMENT_TEAM = 379RD95483;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
@@ -510,7 +531,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};

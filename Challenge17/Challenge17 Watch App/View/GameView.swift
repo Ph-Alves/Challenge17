@@ -7,18 +7,17 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
+    let vm: GameViewModel
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Our Game")
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    GameView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManager()))
 }
