@@ -11,7 +11,7 @@ struct MotionThreshold {
     static let accelerationThreshold: Double = 0.5 //g's
     static let rotationThreshold: Double = 1.0 //rad's
     
-    static func direction(for sample: MotionSample) -> Direction? {
+    static func direction(for sample: MotionSample) -> GameDirection? {
         if let direction = dominantDirection(x: sample.acceleration.x,
                                              y: sample.acceleration.y,
                                              threshold: accelerationThreshold) {
@@ -22,7 +22,7 @@ struct MotionThreshold {
                                  threshold: rotationThreshold)
     }
     
-    private static func dominantDirection(x: Double, y: Double, threshold: Double) -> Direction? {
+    private static func dominantDirection(x: Double, y: Double, threshold: Double) -> GameDirection? {
         let absX = abs(x)
         let absY = abs(y)
         guard max(absX, absY) >= threshold else { return nil }
