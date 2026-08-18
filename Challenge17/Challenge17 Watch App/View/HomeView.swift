@@ -23,5 +23,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManagerMock()))
 }

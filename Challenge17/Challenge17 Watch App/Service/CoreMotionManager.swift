@@ -8,33 +8,57 @@
 import CoreMotion
 
 protocol CoreMotionManagerProtocol {
-    func captureMoves() async
+    var onMotionSample: ((MotionSample) -> Void)? { get set }
+    var onDirectionDetected: ((Direction) -> Void)? { get set }
     
-    func defineMove() -> Direction
+    func captureMoves()
+    func stopCapturing()
+    func defineMove(from sample: MotionSample) -> Direction?
 }
 
 final class CoreMotionManager: CoreMotionManagerProtocol {
     private let motionManager: CMMotionManager
+    private var lastEmittedAt: Date?
+    private let minimumIntervalBetweenMoves: TimeInterval = 0.4
     
-    init() {
-        self.motionManager = CMMotionManager()
+    var onMotionSample: ((MotionSample) -> Void)?
+    var onDirectionDetected: ((Direction) -> Void)?
+    
+    init(motionManager: CMMotionManager = CMMotionManager()) {
+        self.motionManager = motionManager
     }
     
-    func captureMoves() async {
-        motionManager.startAccelerometerUpdates()
-        
-        /*
-         lógica de captura de dados...
-         */
+    func captureMoves() {
+        guard motionManager.isDeviceMotionAvailable else { return }
+        motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
+        motionManager.startDeviceMotionUpdates(to: .main) { [weak self] motion, error in
+            guard let self, let motion else { return }
+            let sample = MotionSample(
+                acceleration: MotionAxisData(x: motion.userAcceleration.x,
+                                             y: motion.userAcceleration.y,
+                                             z: motion.userAcceleration.z),
+                rotationRate: MotionAxisData(x: motion.rotationRate.x,
+                                             y: motion.rotationRate.y,
+                                             z: motion.rotationRate.z),
+                timestamp: motion.timestamp
+            )
+            self.onMotionSample?(sample)
+            
+            guard let direction = self.defineMove(from: sample) else { return }
+            let now = Date()
+            if let last = self.lastEmittedAt, now.timeIntervalSince(last) < self.minimumIntervalBetweenMoves {
+                return
+            }
+            self.lastEmittedAt = now
+            self.onDirectionDetected?(direction)
+        }
+    }
+    func stopCapturing() {
+        motionManager.stopDeviceMotionUpdates()
+        lastEmittedAt = nil
     }
     
-    func defineMove() -> Direction {
-        let data = motionManager.accelerometerData
-        
-        /*
-         lógica de definição de direção...
-         */
-        
-        return .up // Modificar
+    func defineMove(from sample: MotionSample) -> Direction? {
+        MotionThreshold.direction(for: sample)
     }
 }
