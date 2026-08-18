@@ -15,9 +15,11 @@ struct GameView: View {
             Text("Our Game")
         }
         .padding()
+        .onAppear { vm.start() }
+        .onDisappear { vm.stop() }
     }
 }
 
 #Preview {
-    GameView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManager()))
+    GameView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManagerMock()))
 }

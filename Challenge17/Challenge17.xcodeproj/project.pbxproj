@@ -56,6 +56,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		634615EB3034EF6100D6117C /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Challenge17-Watch-App-Info.plist",
+			);
+			target = EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */;
+		};
 		A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -76,6 +83,7 @@
 		EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				634615EB3034EF6100D6117C /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch App" target */,
 				A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */,
 				A013B8E03033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppUITests" target */,
 			);
@@ -475,9 +483,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -508,9 +517,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -540,7 +550,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29HC4SA3R9;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17;
@@ -557,7 +567,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29HC4SA3R9;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17;
