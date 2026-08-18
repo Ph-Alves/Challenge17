@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF8EEDD73034D4EE006A6D62 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8EEDD63034D4EE006A6D62 /* WidgetKit.framework */; };
+		EF8EEDD93034D4EE006A6D62 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8EEDD83034D4EE006A6D62 /* SwiftUI.framework */; };
+		EF8EEDE83034D4EE006A6D62 /* AppComplicationsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EF8EEDD43034D4EE006A6D62 /* AppComplicationsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFBAFE9E30338016009B0AF4 /* Challenge17 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFBAFE9D30338016009B0AF4 /* Challenge17 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EF8EEDE63034D4EE006A6D62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFBAFE9130338016009B0AF4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF8EEDD33034D4EE006A6D62;
+			remoteInfo = AppComplicationsExtension;
+		};
 		EFBAFE9F30338016009B0AF4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFBAFE9130338016009B0AF4 /* Project object */;
@@ -25,16 +35,20 @@
 			remoteGlobalIDString = EFBAFE9C30338016009B0AF4;
 			remoteInfo = "Challenge17 Watch App";
 		};
-		EFBAFEB730338017009B0AF4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EFBAFE9130338016009B0AF4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EFBAFE9C30338016009B0AF4;
-			remoteInfo = "Challenge17 Watch App";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		EF8EEDED3034D4EE006A6D62 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EF8EEDE83034D4EE006A6D62 /* AppComplicationsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFBAFEC330338017009B0AF4 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,10 +63,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EF8EEDD43034D4EE006A6D62 /* AppComplicationsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AppComplicationsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8EEDD63034D4EE006A6D62 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EF8EEDD83034D4EE006A6D62 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		EFBAFE9730338016009B0AF4 /* Challenge17.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge17.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFBAFE9D30338016009B0AF4 /* Challenge17 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Challenge17 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFBAFEAC30338017009B0AF4 /* Challenge17 Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Challenge17 Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFBAFEB630338017009B0AF4 /* Challenge17 Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Challenge17 Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -63,21 +79,28 @@
 			);
 			target = EFBAFEAB30338017009B0AF4 /* Challenge17 Watch AppTests */;
 		};
-		A013B8E03033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppUITests" target */ = {
+		EF8EEDEC3034D4EE006A6D62 /* Exceptions for "AppComplications" folder in "AppComplicationsExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				View/GameView.swift,
+				Info.plist,
 			);
-			target = EFBAFEB530338017009B0AF4 /* Challenge17 Watch AppUITests */;
+			target = EF8EEDD33034D4EE006A6D62 /* AppComplicationsExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		EF8EEDDA3034D4EE006A6D62 /* AppComplications */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EF8EEDEC3034D4EE006A6D62 /* Exceptions for "AppComplications" folder in "AppComplicationsExtension" target */,
+			);
+			path = AppComplications;
+			sourceTree = "<group>";
+		};
 		EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */,
-				A013B8E03033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppUITests" target */,
 			);
 			path = "Challenge17 Watch App";
 			sourceTree = "<group>";
@@ -87,14 +110,18 @@
 			path = "Challenge17 Watch AppTests";
 			sourceTree = "<group>";
 		};
-		EFBAFEB930338017009B0AF4 /* Challenge17 Watch AppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Challenge17 Watch AppUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EF8EEDD13034D4EE006A6D62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8EEDD93034D4EE006A6D62 /* SwiftUI.framework in Frameworks */,
+				EF8EEDD73034D4EE006A6D62 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFBAFE9A30338016009B0AF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,22 +136,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EFBAFEB330338017009B0AF4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF8EEDD53034D4EE006A6D62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF8EEDD63034D4EE006A6D62 /* WidgetKit.framework */,
+				EF8EEDD83034D4EE006A6D62 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EFBAFE9030338016009B0AF4 = {
 			isa = PBXGroup;
 			children = (
 				EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */,
 				EFBAFEAF30338017009B0AF4 /* Challenge17 Watch AppTests */,
-				EFBAFEB930338017009B0AF4 /* Challenge17 Watch AppUITests */,
+				EF8EEDDA3034D4EE006A6D62 /* AppComplications */,
+				EF8EEDD53034D4EE006A6D62 /* Frameworks */,
 				EFBAFE9830338016009B0AF4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -135,7 +165,7 @@
 				EFBAFE9730338016009B0AF4 /* Challenge17.app */,
 				EFBAFE9D30338016009B0AF4 /* Challenge17 Watch App.app */,
 				EFBAFEAC30338017009B0AF4 /* Challenge17 Watch AppTests.xctest */,
-				EFBAFEB630338017009B0AF4 /* Challenge17 Watch AppUITests.xctest */,
+				EF8EEDD43034D4EE006A6D62 /* AppComplicationsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,6 +173,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EF8EEDD33034D4EE006A6D62 /* AppComplicationsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8EEDE93034D4EE006A6D62 /* Build configuration list for PBXNativeTarget "AppComplicationsExtension" */;
+			buildPhases = (
+				EF8EEDD03034D4EE006A6D62 /* Sources */,
+				EF8EEDD13034D4EE006A6D62 /* Frameworks */,
+				EF8EEDD23034D4EE006A6D62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EF8EEDDA3034D4EE006A6D62 /* AppComplications */,
+			);
+			name = AppComplicationsExtension;
+			packageProductDependencies = (
+			);
+			productName = AppComplicationsExtension;
+			productReference = EF8EEDD43034D4EE006A6D62 /* AppComplicationsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EFBAFE9630338016009B0AF4 /* Challenge17 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFBAFEC430338017009B0AF4 /* Build configuration list for PBXNativeTarget "Challenge17" */;
@@ -169,10 +221,12 @@
 				EFBAFE9930338016009B0AF4 /* Sources */,
 				EFBAFE9A30338016009B0AF4 /* Frameworks */,
 				EFBAFE9B30338016009B0AF4 /* Resources */,
+				EF8EEDED3034D4EE006A6D62 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF8EEDE73034D4EE006A6D62 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */,
@@ -207,29 +261,6 @@
 			productReference = EFBAFEAC30338017009B0AF4 /* Challenge17 Watch AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		EFBAFEB530338017009B0AF4 /* Challenge17 Watch AppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EFBAFECA30338017009B0AF4 /* Build configuration list for PBXNativeTarget "Challenge17 Watch AppUITests" */;
-			buildPhases = (
-				EFBAFEB230338017009B0AF4 /* Sources */,
-				EFBAFEB330338017009B0AF4 /* Frameworks */,
-				EFBAFEB430338017009B0AF4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EFBAFEB830338017009B0AF4 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				EFBAFEB930338017009B0AF4 /* Challenge17 Watch AppUITests */,
-			);
-			name = "Challenge17 Watch AppUITests";
-			packageProductDependencies = (
-			);
-			productName = "Challenge17 Watch AppUITests";
-			productReference = EFBAFEB630338017009B0AF4 /* Challenge17 Watch AppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -240,6 +271,9 @@
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
+					EF8EEDD33034D4EE006A6D62 = {
+						CreatedOnToolsVersion = 26.6;
+					};
 					EFBAFE9630338016009B0AF4 = {
 						CreatedOnToolsVersion = 26.6;
 					};
@@ -247,10 +281,6 @@
 						CreatedOnToolsVersion = 26.6;
 					};
 					EFBAFEAB30338017009B0AF4 = {
-						CreatedOnToolsVersion = 26.6;
-						TestTargetID = EFBAFE9C30338016009B0AF4;
-					};
-					EFBAFEB530338017009B0AF4 = {
 						CreatedOnToolsVersion = 26.6;
 						TestTargetID = EFBAFE9C30338016009B0AF4;
 					};
@@ -273,12 +303,19 @@
 				EFBAFE9630338016009B0AF4 /* Challenge17 */,
 				EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */,
 				EFBAFEAB30338017009B0AF4 /* Challenge17 Watch AppTests */,
-				EFBAFEB530338017009B0AF4 /* Challenge17 Watch AppUITests */,
+				EF8EEDD33034D4EE006A6D62 /* AppComplicationsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EF8EEDD23034D4EE006A6D62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFBAFE9530338016009B0AF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,16 +337,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EFBAFEB430338017009B0AF4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF8EEDD03034D4EE006A6D62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
 		EFBAFE9930338016009B0AF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -324,16 +361,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EFBAFEB230338017009B0AF4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EF8EEDE73034D4EE006A6D62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF8EEDD33034D4EE006A6D62 /* AppComplicationsExtension */;
+			targetProxy = EF8EEDE63034D4EE006A6D62 /* PBXContainerItemProxy */;
+		};
 		EFBAFEA030338016009B0AF4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */;
@@ -344,14 +379,76 @@
 			target = EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */;
 			targetProxy = EFBAFEAD30338017009B0AF4 /* PBXContainerItemProxy */;
 		};
-		EFBAFEB830338017009B0AF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */;
-			targetProxy = EFBAFEB730338017009B0AF4 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		EF8EEDEA3034D4EE006A6D62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 29HC4SA3R9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppComplications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AppComplications;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitapp.AppComplications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		EF8EEDEB3034D4EE006A6D62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 29HC4SA3R9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppComplications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AppComplications;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitapp.AppComplications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 		EFBAFEBE30338017009B0AF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -475,7 +572,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = 29HC4SA3R9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
@@ -508,7 +605,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = 29HC4SA3R9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
@@ -617,54 +714,18 @@
 			};
 			name = Release;
 		};
-		EFBAFECB30338017009B0AF4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29HC4SA3R9;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.paulo.Challenge17-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "Challenge17 Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 26.5;
-			};
-			name = Debug;
-		};
-		EFBAFECC30338017009B0AF4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29HC4SA3R9;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.paulo.Challenge17-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "Challenge17 Watch App";
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 26.5;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EF8EEDE93034D4EE006A6D62 /* Build configuration list for PBXNativeTarget "AppComplicationsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8EEDEA3034D4EE006A6D62 /* Debug */,
+				EF8EEDEB3034D4EE006A6D62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EFBAFE9430338016009B0AF4 /* Build configuration list for PBXProject "Challenge17" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -697,15 +758,6 @@
 			buildConfigurations = (
 				EFBAFEC830338017009B0AF4 /* Debug */,
 				EFBAFEC930338017009B0AF4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EFBAFECA30338017009B0AF4 /* Build configuration list for PBXNativeTarget "Challenge17 Watch AppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EFBAFECB30338017009B0AF4 /* Debug */,
-				EFBAFECC30338017009B0AF4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
