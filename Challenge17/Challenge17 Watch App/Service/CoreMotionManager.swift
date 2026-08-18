@@ -7,7 +7,7 @@
 
 import CoreMotion
 
-protocol CoreMotionManagerProtocol {
+protocol CoreMotionManagerProtocol: AnyObject {
     var onMotionSample: ((MotionSample) -> Void)? { get set }
     var onDirectionDetected: ((GameDirection) -> Void)? { get set }
     

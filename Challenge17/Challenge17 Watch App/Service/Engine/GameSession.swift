@@ -8,16 +8,24 @@
 
 import Foundation
 
-nonisolated final class GameSession {
+enum GameEvent: Equatable {
+    case roundStarted(Int)
+    case show(GameDirection)
+    case hideDirection
+    case waitingForInput
+    case correctInput
+    case gameOver
+}
 
-    enum GameEvent: Equatable {
-        case roundStarted(Int)
-        case show(GameDirection)
-        case hideDirection
-        case waitingForInput
-        case correctInput
-        case gameOver
-    }
+nonisolated protocol GameSessionProtocol: AnyObject {
+    var onEvent: ((GameEvent) -> Void)? { get set }
+
+    func start()
+    func receive(_ direction: GameDirection)
+    func stop()
+}
+
+final class GameSession: GameSessionProtocol {
 
     private let engine: GameEngine
 
