@@ -12,6 +12,9 @@ struct Challenge17_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .onOpenURL { url in
+                    
+                }
         }
     }
 }
