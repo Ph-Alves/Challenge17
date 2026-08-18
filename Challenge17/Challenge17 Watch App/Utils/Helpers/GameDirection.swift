@@ -5,7 +5,7 @@
 //  Created by Lucas Vasconcellos Côrtes on 8/17/26.
 //
 
-enum GameDirection: Equatable, CaseIterable {
+nonisolated enum GameDirection: Equatable, CaseIterable {
     case up
     case down
     case right
