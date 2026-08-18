@@ -21,5 +21,10 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManagerMock()))
+    GameView(
+        vm: GameViewModel(
+            gameSession: GameSession(),
+            coreMotionManager: CoreMotionManagerMock()
+        )
+    )
 }

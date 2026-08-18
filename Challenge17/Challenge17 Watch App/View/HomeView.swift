@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var vm = GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManager())
+    @State var vm = GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager())
     
     var body: some View {
         NavigationStack {
@@ -23,5 +23,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManagerMock()))
+    HomeView()
 }
