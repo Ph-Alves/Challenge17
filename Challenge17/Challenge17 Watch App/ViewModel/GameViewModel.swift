@@ -15,11 +15,13 @@ final class GameViewModel {
     private(set) var round: Int = 0
     
     var lastMotionSample: MotionSample?
+    var workoutResult: WorkoutResult?
+    
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
     
-    var workoutManager: WorkoutManagerProtocol
+    @ObservationIgnored private let workoutManager: WorkoutManagerProtocol
 
     enum GameState {
         case idle
@@ -52,6 +54,8 @@ final class GameViewModel {
     func start() {
         resetGameData()
         gameSession.start()
+        
+        workoutResult = nil
         workoutManager.startWorkout()
         state = .running
     }
@@ -60,6 +64,8 @@ final class GameViewModel {
         gameSession.stop()
         coreMotionManager.stopCapturing()
         workoutManager.stopWorkout()
+        
+        workoutResult = workoutManager.workoutResult
     }
 
     func showHome() {

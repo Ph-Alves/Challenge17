@@ -23,7 +23,7 @@ protocol WorkoutManagerProtocol: AnyObject {
     func stopWorkout()
 }
 
-@Observable
+
 final class WorkoutManager: NSObject, WorkoutManagerProtocol, HKWorkoutSessionDelegate {
     func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: any Error) {
     
@@ -37,6 +37,10 @@ final class WorkoutManager: NSObject, WorkoutManagerProtocol, HKWorkoutSessionDe
     
     private var workoutSession: HKWorkoutSession?
     private var workoutBuilder: HKLiveWorkoutBuilder?
+    
+    func returnResult() -> WorkoutResult? {
+        workoutResult
+    }
     
     func askHealthPermission() {
         guard HKHealthStore.isHealthDataAvailable() else {

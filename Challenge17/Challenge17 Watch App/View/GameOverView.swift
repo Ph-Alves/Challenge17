@@ -16,13 +16,13 @@ struct GameOverView: View {
             HStack {
                 Text("Rounds: \(vm.round)")
                 
-                Text("Kcal: \(vm.workoutManager.workoutResult?.calories.formatted(.number.precision(.fractionLength(0))) ?? "0")")
+                Text("Kcal: \(vm.workoutResult?.calories.formatted(.number.precision(.fractionLength(0))) ?? "0")")
             }
             
             HStack {
-                Text("Time: \(Int(vm.workoutManager.workoutResult?.duration ?? 0)/60) : \(Int(vm.workoutManager.workoutResult?.duration ?? 0)%60)")
+                Text("Time: \(Int(vm.workoutResult?.duration ?? 0)/60) : \(Int(vm.workoutResult?.duration ?? 0)%60)")
                 
-                Text("HR: \(vm.workoutManager.workoutResult?.duration.formatted(.number.precision(.fractionLength(0))) ?? "0") BPM")
+                Text("HR: \(vm.workoutResult?.duration.formatted(.number.precision(.fractionLength(0))) ?? "0") BPM")
                 
             }
             

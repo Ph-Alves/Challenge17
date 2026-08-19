@@ -15,9 +15,6 @@ struct GameView: View {
             Text("Our Game")
         }
         .padding()
-        .task{
-            vm.workoutManager.startWorkout()
-        }
     }
 }
 
