@@ -9,12 +9,23 @@ import SwiftUI
 
 @main
 struct Challenge17_Watch_AppApp: App {
+    @State private var vm = GameViewModel(
+        gameSession: GameSession(),
+        coreMotionManager: CoreMotionManager()
+    )
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .onOpenURL { url in
-                    
-                }
+            switch vm.state {
+            case .idle:
+                HomeView(vm: vm)
+
+            case .running, .waiting:
+                GameView(vm: vm)
+
+            case .finished:
+                GameOverView(vm: vm)
+            }
         }
     }
 }

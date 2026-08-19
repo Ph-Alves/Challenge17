@@ -9,41 +9,105 @@ import Observation
 
 @Observable
 final class GameViewModel {
-    var gameEngine: GameEngineProtocol
-    var coreMotionManager: CoreMotionManagerProtocol
-    var currentIndex: Int = 0
+    
+    private(set) var highlightedDirection: GameDirection?
+    private(set) var state: GameState = .idle
+    private(set) var round: Int = 0
+    
     var lastMotionSample: MotionSample?
-    var isGameOver: Bool = false
+    
+    @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
+    @ObservationIgnored private let gameSession: GameSessionProtocol
 
-    init(gameEngine: GameEngineProtocol, coreMotionManager: CoreMotionManagerProtocol) {
-        self.gameEngine = gameEngine
+    enum GameState {
+        case idle
+        case running
+        case waiting
+        case finished
+    }
+
+    init(gameSession: GameSessionProtocol, coreMotionManager: CoreMotionManagerProtocol) {
+        self.gameSession = gameSession
         self.coreMotionManager = coreMotionManager
         self.coreMotionManager.onMotionSample = { [weak self] sample in
             self?.lastMotionSample = sample
         }
         self.coreMotionManager.onDirectionDetected = { [weak self] direction in
             guard let self else { return }
-            let isCorrect = self.gameEngine.compareMove(direction, at: self.currentIndex)
-            guard isCorrect else {
-                self.isGameOver = true
-                self.coreMotionManager.stopCapturing()
-                return
-            }
-            self.currentIndex += 1
-            if self.currentIndex == self.gameEngine.movesDirections.count {
-                self.gameEngine.generateNewMove()
-            }
+            guard state == .waiting else { return }
+            
+            self.gameSession.receive(direction)
+            self.coreMotionManager.stopCapturing()
         }
+        
+        self.gameSession.delegate = self
     }
 
     func start() {
-        currentIndex = 0
-        isGameOver = false
-        gameEngine.start()
-        coreMotionManager.captureMoves()
+        resetGameData()
+        gameSession.start()
+        state = .running
     }
     
     func stop() {
+        gameSession.stop()
         coreMotionManager.stopCapturing()
+    }
+
+    func showHome() {
+        stop()
+        resetGameData()
+        state = .idle
+    }
+
+    func showGameOver() {
+        stop()
+        state = .finished
+    }
+    
+}
+
+// MARK: - Internal
+extension GameViewModel: GameSessionDelegate {
+    
+    func onEvent(_ event: GameEvent) {
+        Task {
+            await MainActor.run {
+                self.updateState(for: event)
+            }
+        }
+    }
+    
+    private func updateState(for event: GameEvent) {
+        switch event {
+        case .roundStarted(let currentRound):
+            round = currentRound
+            coreMotionManager.stopCapturing()
+            state = .running
+            
+        case .show(let direction):
+            highlightedDirection = direction
+            
+        case .hideDirection:
+            highlightedDirection = nil
+            
+        case .waitingForInput:
+            self.state = .waiting
+            coreMotionManager.captureMoves()
+            
+        case .correctInput:
+            coreMotionManager.captureMoves()
+            
+        case .gameOver:
+            highlightedDirection = nil
+            state = .finished
+            coreMotionManager.stopCapturing()
+        }
+    }
+    
+    private func resetGameData() {
+        highlightedDirection = nil
+        round = 0
+        lastMotionSample = nil
     }
 }

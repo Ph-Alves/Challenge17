@@ -13,13 +13,22 @@ struct GameView: View {
     var body: some View {
         VStack {
             Text("Our Game")
+
+            Text("Round: \(vm.round)")
+            
+            Button("End Game") {
+                vm.showGameOver()
+            }
         }
         .padding()
-        .onAppear { vm.start() }
-        .onDisappear { vm.stop() }
     }
 }
 
 #Preview {
-    GameView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManagerMock()))
+    GameView(
+        vm: GameViewModel(
+            gameSession: GameSession(),
+            coreMotionManager: CoreMotionManagerMock()
+        )
+    )
 }

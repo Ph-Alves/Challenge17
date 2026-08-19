@@ -7,13 +7,13 @@
 
 import CoreMotion
 
-protocol CoreMotionManagerProtocol {
+protocol CoreMotionManagerProtocol: AnyObject {
     var onMotionSample: ((MotionSample) -> Void)? { get set }
-    var onDirectionDetected: ((Direction) -> Void)? { get set }
+    var onDirectionDetected: ((GameDirection) -> Void)? { get set }
     
     func captureMoves()
     func stopCapturing()
-    func defineMove(from sample: MotionSample) -> Direction?
+    func defineMove(from sample: MotionSample) -> GameDirection?
 }
 
 final class CoreMotionManager: CoreMotionManagerProtocol {
@@ -22,7 +22,7 @@ final class CoreMotionManager: CoreMotionManagerProtocol {
     private let minimumIntervalBetweenMoves: TimeInterval = 0.4
     
     var onMotionSample: ((MotionSample) -> Void)?
-    var onDirectionDetected: ((Direction) -> Void)?
+    var onDirectionDetected: ((GameDirection) -> Void)?
     
     init(motionManager: CMMotionManager = CMMotionManager()) {
         self.motionManager = motionManager
@@ -58,7 +58,7 @@ final class CoreMotionManager: CoreMotionManagerProtocol {
         lastEmittedAt = nil
     }
     
-    func defineMove(from sample: MotionSample) -> Direction? {
+    func defineMove(from sample: MotionSample) -> GameDirection? {
         MotionThreshold.direction(for: sample)
     }
 }

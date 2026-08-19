@@ -7,7 +7,7 @@ import Foundation
 
 final class CoreMotionManagerMock: CoreMotionManagerProtocol {
     var onMotionSample: ((MotionSample) -> Void)?
-    var onDirectionDetected: ((Direction) -> Void)?
+    var onDirectionDetected: ((GameDirection) -> Void)?
     
     func captureMoves() {
         // Mock implementation
@@ -17,7 +17,7 @@ final class CoreMotionManagerMock: CoreMotionManagerProtocol {
         // Mock implementation
     }
     
-    func defineMove(from sample: MotionSample) -> Direction? {
+    func defineMove(from sample: MotionSample) -> GameDirection? {
         return nil
     }
 }
