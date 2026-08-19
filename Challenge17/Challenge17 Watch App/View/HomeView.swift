@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var vm = GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManager())
+    @State var vm = GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManager(), workoutManager: WorkoutManager())
     
     var body: some View {
         NavigationStack {
             VStack {
-                NavigationLink(destination: GameView(vm: vm)) {
-                    Text("Play")
+                NavigationLink("Play") {
+                    GameView(vm: vm)
+                }
+                
+                Button("Ask Permission") {
+                    vm.workoutManager.askHealthPermission()
                 }
             }
             .padding()

@@ -11,9 +11,11 @@ import Observation
 final class GameViewModel {
     var gameEngine: GameEngineProtocol
     var coreMotionManager: CoreMotionManagerProtocol
+    var workoutManager: WorkoutManagerProtocol
     
-    init(gameEngine: GameEngineProtocol, coreMotionManager: CoreMotionManagerProtocol) {
+    init(gameEngine: GameEngineProtocol, coreMotionManager: CoreMotionManagerProtocol, workoutManager: WorkoutManagerProtocol) {
         self.gameEngine = gameEngine
         self.coreMotionManager = coreMotionManager
+        self.workoutManager = workoutManager
     }
 }
