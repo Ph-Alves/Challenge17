@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Foundation
 
 @Observable
 final class GameViewModel {
@@ -13,6 +14,10 @@ final class GameViewModel {
     private(set) var highlightedDirection: GameDirection?
     private(set) var state: GameState = .idle
     private(set) var round: Int = 0
+    
+    var completedOnboarding: Bool = UserDefaults.standard.bool(forKey: "onboardingCompleted") {
+        didSet { UserDefaults.standard.set(completedOnboarding, forKey: "onboardingCompleted") }
+    }
     
     var lastMotionSample: MotionSample?
     

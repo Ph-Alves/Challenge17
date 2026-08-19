@@ -18,8 +18,11 @@ struct Challenge17_Watch_AppApp: App {
         WindowGroup {
             switch vm.state {
             case .idle:
-                HomeView(vm: vm)
-
+                if vm.completedOnboarding {
+                    HomeView(vm: vm)
+                } else {
+                    TutorialView(gameViewModel: vm)
+                }
             case .running, .waiting:
                 GameView(vm: vm)
 
