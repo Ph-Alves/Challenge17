@@ -37,6 +37,7 @@ final class GameViewModel {
             guard state == .waiting else { return }
             
             self.gameSession.receive(direction)
+            self.coreMotionManager.stopCapturing()
         }
         
         self.gameSession.delegate = self
@@ -95,7 +96,7 @@ extension GameViewModel: GameSessionDelegate {
             coreMotionManager.captureMoves()
             
         case .correctInput:
-            break
+            coreMotionManager.captureMoves()
             
         case .gameOver:
             highlightedDirection = nil
