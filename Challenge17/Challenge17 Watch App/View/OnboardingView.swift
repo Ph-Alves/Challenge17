@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct TutorialView: View {
+struct OnboardingView: View {
     
     let gameViewModel: GameViewModel
     
@@ -131,5 +131,5 @@ struct TutorialView: View {
 }
 
 #Preview {
-    TutorialView(gameViewModel: GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager()))
+    OnboardingView(gameViewModel: GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager()))
 }

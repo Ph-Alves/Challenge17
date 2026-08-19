@@ -21,7 +21,7 @@ struct Challenge17_Watch_AppApp: App {
                 if vm.completedOnboarding {
                     HomeView(vm: vm)
                 } else {
-                    TutorialView(gameViewModel: vm)
+                    OnboardingView(gameViewModel: vm)
                 }
             case .running, .waiting:
                 GameView(vm: vm)
