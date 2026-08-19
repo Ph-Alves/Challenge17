@@ -72,13 +72,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		634615EB3034EF6100D6117C /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Challenge17-Watch-App-Info.plist",
-			);
-			target = EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */;
-		};
 		A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -107,7 +100,6 @@
 		EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				634615EB3034EF6100D6117C /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch App" target */,
 				A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */,
 			);
 			path = "Challenge17 Watch App";
