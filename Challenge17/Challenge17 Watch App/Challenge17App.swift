@@ -19,13 +19,16 @@ struct Challenge17_Watch_AppApp: App {
         WindowGroup {
             switch vm.state {
             case .idle:
-                HomeView(vm: vm)
+                HomeView(gameViewModel: vm)
+                    .background(Color.viewBckg)
 
             case .running, .waiting:
                 GameView(vm: vm)
+                    .background(Color.viewBckg)
 
             case .finished:
                 GameOverView(vm: vm)
+                    .background(Color.viewBckg)
             }
         }
     }
