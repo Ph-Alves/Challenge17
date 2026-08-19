@@ -39,7 +39,7 @@ final class GameViewModel {
             self.gameSession.receive(direction)
         }
         
-        self.bindSession()
+        self.gameSession.delegate = self
     }
 
     func start() {
@@ -67,16 +67,12 @@ final class GameViewModel {
 }
 
 // MARK: - Internal
-extension GameViewModel {
+extension GameViewModel: GameSessionDelegate {
     
-    private func bindSession() {
-        gameSession.onEvent = { [weak self] event in
-            guard let self else { return }
-
-            Task {
-                await MainActor.run {
-                    self.updateState(for: event)
-                }
+    func onEvent(_ event: GameEvent) {
+        Task {
+            await MainActor.run {
+                self.updateState(for: event)
             }
         }
     }

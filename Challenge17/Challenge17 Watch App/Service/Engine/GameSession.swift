@@ -17,9 +17,13 @@ enum GameEvent: Equatable {
     case gameOver
 }
 
-nonisolated protocol GameSessionProtocol: AnyObject {
-    var onEvent: ((GameEvent) -> Void)? { get set }
+protocol GameSessionDelegate: AnyObject {
+    func onEvent(_ event: GameEvent)
+}
 
+nonisolated protocol GameSessionProtocol: AnyObject {
+    var delegate: GameSessionDelegate? { get set }
+    
     func start()
     func receive(_ direction: GameDirection)
     func stop()
@@ -28,6 +32,7 @@ nonisolated protocol GameSessionProtocol: AnyObject {
 final class GameSession: GameSessionProtocol {
 
     private let engine: GameEngine
+    weak var delegate: GameSessionDelegate?
 
     private let highlightDuration: Duration
     private let gapDuration: Duration
@@ -35,7 +40,6 @@ final class GameSession: GameSessionProtocol {
     private var playbackTask: Task<Void, Never>?
     private var round = 0
 
-    var onEvent: ((GameEvent) -> Void)?
 
     init(
         engine: GameEngine = GameEngine(),
@@ -65,14 +69,14 @@ final class GameSession: GameSessionProtocol {
 
         switch result {
         case .correct:
-            onEvent?(.correctInput)
+            delegate?.onEvent(.correctInput)
 
         case .completed:
             startNextRound()
 
         case .incorrect:
             playbackTask?.cancel()
-            onEvent?(.gameOver)
+            delegate?.onEvent(.gameOver)
         }
     }
 
@@ -97,7 +101,7 @@ final class GameSession: GameSessionProtocol {
         playbackTask = Task { [weak self] in
             guard let self else { return }
 
-            onEvent?(.roundStarted(round))
+            delegate?.onEvent(.roundStarted(round))
 
             engine.beginInput()
 
@@ -106,7 +110,7 @@ final class GameSession: GameSessionProtocol {
                     return
                 }
 
-                onEvent?(.show(direction))
+                delegate?.onEvent(.show(direction))
 
                 do {
                     try await Task.sleep(for: highlightDuration)
@@ -118,7 +122,7 @@ final class GameSession: GameSessionProtocol {
                     return
                 }
 
-                onEvent?(.hideDirection)
+                delegate?.onEvent(.hideDirection)
 
                 do {
                     try await Task.sleep(for: gapDuration)
@@ -131,7 +135,7 @@ final class GameSession: GameSessionProtocol {
                 return
             }
 
-            onEvent?(.waitingForInput)
+            delegate?.onEvent(.waitingForInput)
         }
     }
 }
