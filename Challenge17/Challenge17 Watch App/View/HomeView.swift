@@ -16,10 +16,6 @@ struct HomeView: View {
                 NavigationLink("Play") {
                     GameView(vm: vm)
                 }
-                
-                Button("Ask Permission") {
-                    vm.workoutManager.askHealthPermission()
-                }
             }
             .padding()
         }
