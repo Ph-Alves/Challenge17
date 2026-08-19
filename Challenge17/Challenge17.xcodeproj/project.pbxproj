@@ -582,6 +582,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Our app need permission to collect your heart rate and calorie spense during activities to show after the workout.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Our app needs your permission to save your workout to the health app.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -617,6 +619,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Our app need permission to collect your heart rate and calorie spense during activities to show after the workout.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Our app needs your permission to save your workout to the health app.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
