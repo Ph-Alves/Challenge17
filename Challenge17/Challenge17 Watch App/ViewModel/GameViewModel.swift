@@ -38,15 +38,30 @@ final class GameViewModel {
             
             self.gameSession.receive(direction)
         }
+        
+        self.bindSession()
     }
 
     func start() {
+        resetGameData()
         gameSession.start()
+        state = .running
     }
     
     func stop() {
         gameSession.stop()
         coreMotionManager.stopCapturing()
+    }
+
+    func showHome() {
+        stop()
+        resetGameData()
+        state = .idle
+    }
+
+    func showGameOver() {
+        stop()
+        state = .finished
     }
     
 }
@@ -93,8 +108,9 @@ extension GameViewModel {
         }
     }
     
-    private func finish() {
-        gameSession.stop()
-        state = .idle
+    private func resetGameData() {
+        highlightedDirection = nil
+        round = 0
+        lastMotionSample = nil
     }
 }

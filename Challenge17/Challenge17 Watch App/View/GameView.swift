@@ -13,10 +13,14 @@ struct GameView: View {
     var body: some View {
         VStack {
             Text("Our Game")
+
+            Text("Round: \(vm.round)")
+            
+            Button("End Game") {
+                vm.showGameOver()
+            }
         }
         .padding()
-        .onAppear { vm.start() }
-        .onDisappear { vm.stop() }
     }
 }
 

@@ -1,19 +1,21 @@
 //
-//  HomeView.swift
+//  GameOverView.swift
 //  Challenge17
 //
-//  Created by Lucas Vasconcellos Côrtes on 8/17/26.
+//  Created by Codex on 18/08/26.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+struct GameOverView: View {
     let vm: GameViewModel
-    
+
     var body: some View {
-        VStack {
-            Button("Play") {
-                vm.start()
+        VStack(spacing: 8) {
+            Text("Game Over")
+
+            Button("Home") {
+                vm.showHome()
             }
         }
         .padding()
@@ -21,7 +23,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(
+    GameOverView(
         vm: GameViewModel(
             gameSession: GameSession(),
             coreMotionManager: CoreMotionManagerMock()
