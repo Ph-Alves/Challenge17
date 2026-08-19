@@ -11,7 +11,8 @@ import SwiftUI
 struct Challenge17_Watch_AppApp: App {
     @State private var vm = GameViewModel(
         gameSession: GameSession(),
-        coreMotionManager: CoreMotionManager()
+        coreMotionManager: CoreMotionManager(),
+        workoutManager: WorkoutManager()
     )
 
     var body: some Scene {

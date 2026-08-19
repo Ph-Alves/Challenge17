@@ -22,5 +22,5 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView(vm: GameViewModel(gameEngine: GameEngineMock(), coreMotionManager: CoreMotionManager(), workoutManager: WorkoutManager()))
+    GameView(vm: GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager(), workoutManager: WorkoutManager()))
 }

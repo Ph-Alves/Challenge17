@@ -18,6 +18,8 @@ final class GameViewModel {
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
+    
+    var workoutManager: WorkoutManagerProtocol
 
     enum GameState {
         case idle
@@ -26,9 +28,11 @@ final class GameViewModel {
         case finished
     }
 
-    init(gameSession: GameSessionProtocol, coreMotionManager: CoreMotionManagerProtocol) {
+    init(gameSession: GameSessionProtocol, coreMotionManager: CoreMotionManagerProtocol, workoutManager: WorkoutManagerProtocol) {
         self.gameSession = gameSession
         self.coreMotionManager = coreMotionManager
+        self.workoutManager = workoutManager
+        
         self.coreMotionManager.onMotionSample = { [weak self] sample in
             self?.lastMotionSample = sample
         }
@@ -41,17 +45,21 @@ final class GameViewModel {
         }
         
         self.gameSession.delegate = self
+        
+        
     }
 
     func start() {
         resetGameData()
         gameSession.start()
+        workoutManager.startWorkout()
         state = .running
     }
     
     func stop() {
         gameSession.stop()
         coreMotionManager.stopCapturing()
+        workoutManager.stopWorkout()
     }
 
     func showHome() {
