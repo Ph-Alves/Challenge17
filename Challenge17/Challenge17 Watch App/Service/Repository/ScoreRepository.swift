@@ -26,6 +26,7 @@ final class ScoreRepository: ScoreRepositoryProtocol {
 
     private let userDefaults: UserDefaults
 
+    
     var hasFinishedOnboarding: Bool {
         userDefaults.bool(forKey: Keys.hasFinishedOnboarding)
     }
