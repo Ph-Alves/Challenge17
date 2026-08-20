@@ -18,10 +18,7 @@ final class GameViewModel {
     private(set) var workoutResult: WorkoutResult?
     private(set) var highScoreRound: Int
     private(set) var totalCaloriesBurned: Int
-    
-    var completedOnboarding: Bool = UserDefaults.standard.bool(forKey: "onboardingCompleted") {
-        didSet { UserDefaults.standard.set(completedOnboarding, forKey: "onboardingCompleted") }
-    }
+    private(set) var hasFinishedOnboarding: Bool
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
@@ -50,6 +47,7 @@ final class GameViewModel {
         self.hapticService = hapticService
         self.highScoreRound = scoreRepository.highScoreRound
         self.totalCaloriesBurned = scoreRepository.totalCaloriesBurned
+        self.hasFinishedOnboarding = scoreRepository.hasFinishedOnboarding
         
         self.coreMotionManager.onMotionSample = { [weak self] sample in
             self?.lastMotionSample = sample
@@ -96,6 +94,10 @@ final class GameViewModel {
         state = .finished
     }
     
+    func completedOnboarding(_ completed: Bool) {
+        self.scoreRepository.finishOnboarding()
+        self.hasFinishedOnboarding = completed
+    }
 }
 
 // MARK: - Internal

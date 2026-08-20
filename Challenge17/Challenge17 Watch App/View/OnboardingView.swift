@@ -119,7 +119,7 @@ struct OnboardingView: View {
                     Spacer()
                     
                     OnboardingButton(buttonImage: "chevron.right", action: {
-                        gameViewModel.completedOnboarding = true
+                        gameViewModel.completedOnboarding(true)
                     })
                 }
             }
