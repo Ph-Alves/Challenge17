@@ -20,14 +20,12 @@ struct Challenge17_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             switch vm.state {
+            case .onBoarding:
+                OnboardingView(gameViewModel: vm)
+                    .background(Color.viewBckg)
             case .idle:
-                if vm.hasFinishedOnboarding {
-                    HomeView(gameViewModel: vm)
-                        .background(Color.viewBckg)
-                } else {
-                    OnboardingView(gameViewModel: vm)
-                        .background(Color.viewBckg)
-                }
+                HomeView(gameViewModel: vm)
+                    .background(Color.viewBckg)
             case .running, .waiting:
                 GameView(vm: vm)
                     .background(Color.viewBckg)

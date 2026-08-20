@@ -12,7 +12,7 @@ struct OnboardingView: View {
     
     let gameViewModel: GameViewModel
     
-    @State private var step = 1
+    @State private var step = 2
     @State private var currentFrame = 0
     @State private var currentDirection = 0
     
@@ -52,81 +52,84 @@ struct OnboardingView: View {
     private let frameTimer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        
-        switch step {
-        case 1:
-            VStack {
-                Text("Bem vindo(a) ao app!")
-                Spacer()
-                HStack {
+        VStack {
+            switch step {
+            case 1:
+                VStack {
+                    Text("Bem vindo(a) ao app!")
                     Spacer()
-                    OnboardingButton(buttonImage: "chevron.right", action: {
-                        step += 1
-                    })
+                    HStack {
+                        Spacer()
+                        OnboardingButton(buttonImage: "chevron.right", action: {
+                            step += 1
+                        })
+                    }
                 }
-            }
-        case 2:
-            VStack(spacing: 10) {
-                Text("Ao inciar, uma sequência de setas aparecerão!")
-                
-                Image(systemName: "arrow.left")
-                    .font(.system(size: 40))
-                
-                Spacer()
-                HStack {
-                    OnboardingButton(buttonImage: "chevron.left", action: {
-                        step -= 1
-                    })
+            case 2:
+                VStack {
+                    Text("Ao inciar, uma sequência de setas aparecerão!")
+                    Spacer()
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 30))
                     
                     Spacer()
-                    
-                    OnboardingButton(buttonImage: "chevron.right", action: {
-                        step += 1
-                    })
+                    HStack {
+                        OnboardingButton(buttonImage: "chevron.left", action: {
+                            step -= 1
+                        })
+                        
+                        Spacer()
+                        
+                        OnboardingButton(buttonImage: "chevron.right", action: {
+                            step += 1
+                        })
+                    }
                 }
-            }
-        case 3:
-            VStack {
-                Text("Movimente o braço na direção da seta!")
-                    .multilineTextAlignment(.center)
-                HStack {
-                    Spacer()
-                    
-                    Image(systemName: directions[currentDirection].arrow)
-                    
-                    Spacer()
-                    
-                    Image(directions[currentDirection].frames[currentFrame])
-                        .resizable()
-                        .scaledToFit()
-                        .onReceive(frameTimer) { _ in
-                            if currentFrame == 11 {
-                                currentFrame = 0
-                                currentDirection = (currentDirection + 1) % directions.count
-                            } else {
-                                currentFrame += 1
+            case 3:
+                VStack {
+                    Text("Movimente o braço na direção da seta!")
+                        .multilineTextAlignment(.center)
+                    HStack {
+                        Spacer()
+                        
+                        Image(systemName: directions[currentDirection].arrow)
+                            .font(.system(size: 30))
+                        
+                        Spacer()
+                        
+                        Image(directions[currentDirection].frames[currentFrame])
+                            .resizable()
+                            .scaledToFit()
+                            .onReceive(frameTimer) { _ in
+                                if currentFrame == 11 {
+                                    currentFrame = 0
+                                    currentDirection = (currentDirection + 1) % directions.count
+                                } else {
+                                    currentFrame += 1
+                                }
                             }
-                        }
-                    
+                        
+                        Spacer()
+                    }
                     Spacer()
+                    HStack {
+                        OnboardingButton(buttonImage: "chevron.left", action: {
+                            step -= 1
+                        })
+                        
+                        Spacer()
+                        
+                        OnboardingButton(buttonImage: "chevron.right", action: {
+                            gameViewModel.completedOnboarding(true)
+                            gameViewModel.showHome()
+                        })
+                    }
                 }
-                Spacer()
-                HStack {
-                    OnboardingButton(buttonImage: "chevron.left", action: {
-                        step -= 1
-                    })
-                    
-                    Spacer()
-                    
-                    OnboardingButton(buttonImage: "chevron.right", action: {
-                        gameViewModel.completedOnboarding(true)
-                    })
-                }
+            default:
+                EmptyView()
             }
-        default:
-            EmptyView()
         }
-        
+        .padding(.horizontal, 10)
     }
 }
 

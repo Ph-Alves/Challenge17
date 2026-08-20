@@ -42,11 +42,13 @@ struct HomeView: View {
             .padding(20)
             .background(.purple)
             .clipShape(Circle())
+            .contentShape(Circle())
             .shadow(color: .purple, radius: 10)
 
             HStack {
                 Button {
-
+                    gameViewModel.completedOnboarding(false)
+                    gameViewModel.startOnboarding()
                 } label: {
                     Image(systemName: "questionmark")
                 }
@@ -57,6 +59,7 @@ struct HomeView: View {
                 Spacer()
             }
         }
+        .padding(.horizontal, 10)
     }
 }
 

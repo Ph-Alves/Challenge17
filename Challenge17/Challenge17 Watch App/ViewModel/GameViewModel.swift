@@ -28,6 +28,7 @@ final class GameViewModel {
     @ObservationIgnored private let hapticService: HapticServiceProtocol
 
     enum GameState {
+        case onBoarding
         case idle
         case running
         case waiting
@@ -50,6 +51,12 @@ final class GameViewModel {
         self.totalCaloriesBurned = scoreRepository.totalCaloriesBurned
         self.hasFinishedOnboarding = scoreRepository.hasFinishedOnboarding
         
+        if hasFinishedOnboarding {
+            self.state = .idle
+        } else {
+            self.state = .onBoarding
+        }
+        
         self.coreMotionManager.onMotionSample = { [weak self] sample in
             self?.lastMotionSample = sample
         }
@@ -63,6 +70,10 @@ final class GameViewModel {
         self.gameSession.delegate = self
         
         
+    }
+    
+    func startOnboarding() {
+        state = .onBoarding
     }
 
     func start() {
