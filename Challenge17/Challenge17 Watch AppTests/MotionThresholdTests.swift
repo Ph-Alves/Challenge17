@@ -10,42 +10,42 @@ import XCTest
 
 final class MotionThresholdTests: XCTestCase {
     
-    private func sample(ax: Double = 0, ay: Double = 0, az: Double = 0,
-                        rx: Double = 0, ry: Double = 0, rz: Double = 0) -> MotionSample {
+    private func sample(pitch: Double = 0, roll: Double = 0, yaw: Double = 0) -> MotionSample {
         MotionSample(
-            acceleration: MotionAxisData(x: ax, y: ay, z: az),
-            rotationRate: MotionAxisData(x: rx, y: ry, z: rz),
+            acceleration: MotionAxisData(x: 0, y: 0, z: 0),
+            rotationRate: MotionAxisData(x: 0, y: 0, z: 0),
+            attitude: MotionAxisData(x: pitch, y: roll, z: yaw),
             timestamp: 0
         )
     }
     
     func testSmallMovement_returnsNil() {
-        let result = MotionThreshold.direction(for: sample(ax: 0.1, ay: 0.1, rx: 0.1, ry: 0.1))
+        let result = MotionThreshold.direction(for: sample(pitch: 0.1, roll: 0.1))
         XCTAssertNil(result)
     }
     
-    func testStrongNegativeYAcceleration_returnsUp() {
-        let result = MotionThreshold.direction(for: sample(ay: -0.8))
+    func testStrongNegativePitch_returnsUp() {
+        let result = MotionThreshold.direction(for: sample(pitch: -0.5))
         XCTAssertEqual(result, .up)
     }
     
-    func testStrongPositiveYAcceleration_returnsDown() {
-        let result = MotionThreshold.direction(for: sample(ay: 0.8))
+    func testStrongPositivePitch_returnsDown() {
+        let result = MotionThreshold.direction(for: sample(pitch: 0.5))
         XCTAssertEqual(result, .down)
     }
     
-    func testStrongPositiveXAcceleration_returnsRight() {
-        let result = MotionThreshold.direction(for: sample(ax: 0.8))
+    func testStrongPositiveRoll_returnsRight() {
+        let result = MotionThreshold.direction(for: sample(roll: 0.5))
         XCTAssertEqual(result, .right)
     }
     
-    func testStrongNegativeXAcceleration_returnsLeft() {
-        let result = MotionThreshold.direction(for: sample(ax: -0.8))
+    func testStrongNegativeRoll_returnsLeft() {
+        let result = MotionThreshold.direction(for: sample(roll: -0.5))
         XCTAssertEqual(result, .left)
     }
     
-    func testRotationAboveThreshold_whenAccelerationBelowThreshold_returnsDirection() {
-        let result = MotionThreshold.direction(for: sample(ax: 0.1, ay: 0.1, ry: -1.5))
-        XCTAssertEqual(result, .up)
+    func testDiagonalMovement_returnsNil() {
+        let result = MotionThreshold.direction(for: sample(pitch: 0.5, roll: 0.45))
+        XCTAssertNil(result)
     }
 }

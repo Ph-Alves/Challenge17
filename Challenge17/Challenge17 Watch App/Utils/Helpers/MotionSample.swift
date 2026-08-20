@@ -16,5 +16,6 @@ struct MotionAxisData: Equatable {
 struct MotionSample: Equatable {
     let acceleration: MotionAxisData // userAcceleration (CMDeviceMotion)
     let rotationRate: MotionAxisData // rotationRate (giroscopio, CMDeviceMotion)
+    let attitude: MotionAxisData // pitch, roll, yaw (angulos em radianos)
     let timestamp: TimeInterval
 }
