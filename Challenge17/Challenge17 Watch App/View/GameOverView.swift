@@ -81,7 +81,7 @@ struct GameOverView: View {
             
             
         }
-        .frame(width: .infinity, height: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
