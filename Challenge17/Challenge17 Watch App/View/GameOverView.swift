@@ -12,27 +12,76 @@ struct GameOverView: View {
     
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack {
             HStack {
-                Text("Rounds: \(vm.round)")
+                VStack(alignment: .leading) {
+                    Text("BPM")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    Text("\(vm.workoutResult?.duration.formatted(.number.precision(.fractionLength(0))) ?? "0")")
+                        .bold()
+                        .foregroundStyle(Color.red)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("Kcal: \(vm.workoutResult?.calories.formatted(.number.precision(.fractionLength(0))) ?? "0")")
+                
+                VStack(alignment: .center) {
+                    Text("Time")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    Text(Duration.seconds(vm.workoutResult?.duration ?? 0),format: .time(pattern: .minuteSecond))
+                        .bold()
+                        .foregroundStyle(.blue)
+                }
+                .frame(maxWidth: .infinity)
+                
+                
+                VStack(alignment: .trailing) {
+                    Text("CAL")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    Text("\(vm.workoutResult?.calories.formatted(.number.precision(.fractionLength(0))) ?? "0")")
+                        .bold()
+                        .foregroundStyle(Color.orange)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                
+                
             }
             
-            HStack {
-                Text("Time: \(Int(vm.workoutResult?.duration ?? 0)/60) : \(Int(vm.workoutResult?.duration ?? 0)%60)")
-                
-                Text("HR: \(vm.workoutResult?.duration.formatted(.number.precision(.fractionLength(0))) ?? "0") BPM")
-                
+            Spacer()
+            
+            VStack(alignment: .center) {
+                Text("Round")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                Text("\(vm.round)")
+                    .font(.title2)
+                    .bold()
             }
             
-            Text("Game Over")
-
-            Button("Home") {
-                vm.showHome()
+            Spacer()
+            
+            HStack {
+                Button {
+                    vm.showHome()
+                } label: {
+                    Text("Home")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.background)
+                .frame(maxWidth: .infinity, minHeight: 28)
+                .background(Color.purple)
+                .clipShape(Capsule())
+                .shadow(color: .purple, radius: 2)
             }
+            .frame(maxHeight: 28, alignment: .bottom)
+            
+            
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
