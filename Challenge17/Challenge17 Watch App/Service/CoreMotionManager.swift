@@ -22,7 +22,7 @@ final class CoreMotionManager: CoreMotionManagerProtocol {
     private var lastEmittedAt: Date?
     private let minimumIntervalBetweenMoves: TimeInterval = 1.0
     private var isAwaitingReturnToOrigin = false
-    private let originThreshold: Double = 0.15 // Radianos (~9 graus) para considerar o braço de volta a posicao de origem
+    private let originThreshold: Double = 0.20 // Radianos (~9 graus) para considerar o braço de volta a posicao de origem
     
     var onMotionSample: ((MotionSample) -> Void)?
     var onDirectionDetected: ((GameDirection) -> Void)?
@@ -33,7 +33,7 @@ final class CoreMotionManager: CoreMotionManagerProtocol {
     
     func captureMoves() {
         guard motionManager.isDeviceMotionAvailable else { return }
-        motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
+        motionManager.deviceMotionUpdateInterval = 0.5 / 40.0
         
         self.referenceAttitude = nil
         self.isAwaitingReturnToOrigin = false

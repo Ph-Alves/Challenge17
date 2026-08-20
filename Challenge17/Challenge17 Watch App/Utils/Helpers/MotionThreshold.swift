@@ -1,3 +1,4 @@
+
 //
 //  MotionThreshold.swift
 //  Challenge17
@@ -8,33 +9,40 @@
 import Foundation
 
 struct MotionThreshold {
-    static let attitudeThreshold: Double = 0.4 // Radianos (~23 graus)
-    
+    static let upThreshold: Double = 0.5 // Radianos (~23 graus)
+    static let downThreshold: Double = 0.5 // Radianos (~23 graus)
+    static let leftThreshold: Double = 0.5 // Radianos (~23 graus)
+    static let rightThreshold: Double = 0.5 // Radianos (~23 graus)
+
     static func direction(for sample: MotionSample) -> GameDirection? {
-        let pitch = sample.attitude.x
-        let roll = sample.attitude.y
-        
+        let pitch = sample.acceleration.x
+        let roll = sample.acceleration.z
+
         let absPitch = abs(pitch)
         let absRoll = abs(roll)
-        
-        guard max(absPitch, absRoll) >= attitudeThreshold else { return nil }
-        
+
         // Margem de segurança: O eixo de inclinação secundário deve ser menor que 40% do principal
         // Isso exige movimentos mais 'limpos' e isolados
         let marginFactor = 0.4
-        
+
         if absPitch > absRoll {
             // Eixo Vertical (Pitch)
-            if absRoll < absPitch * marginFactor {
-                return pitch < 0 ? .up : .down
+            guard absRoll < absPitch * marginFactor else { return nil }
+
+            if pitch < 0 {
+                return absPitch >= upThreshold ? .right : nil
+            } else {
+                return absPitch >= downThreshold ? .left : nil
             }
         } else {
             // Eixo Horizontal (Roll)
-            if absPitch < absRoll * marginFactor {
-                return roll > 0 ? .right : .left
+            guard absPitch < absRoll * marginFactor else { return nil }
+
+            if roll > 0 {
+                return absRoll >= rightThreshold ? .down : nil
+            } else {
+                return absRoll >= leftThreshold ? .up : nil
             }
         }
-        
-        return nil
     }
 }
