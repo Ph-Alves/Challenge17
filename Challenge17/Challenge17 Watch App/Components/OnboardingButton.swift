@@ -22,6 +22,7 @@ struct OnboardingButton: View {
         .padding()
         .background(.purple)
         .clipShape(Circle())
+        .contentShape(Circle())
     }
 }
 
