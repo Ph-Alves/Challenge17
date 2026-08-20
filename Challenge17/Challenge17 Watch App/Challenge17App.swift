@@ -19,15 +19,19 @@ struct Challenge17_Watch_AppApp: App {
             switch vm.state {
             case .idle:
                 if vm.completedOnboarding {
-                    HomeView(vm: vm)
+                    HomeView(gameViewModel: vm)
+                        .background(Color.viewBckg)
                 } else {
                     OnboardingView(gameViewModel: vm)
+                        .background(Color.viewBckg)
                 }
             case .running, .waiting:
                 GameView(vm: vm)
+                    .background(Color.viewBckg)
 
             case .finished:
                 GameOverView(vm: vm)
+                    .background(Color.viewBckg)
             }
         }
     }
