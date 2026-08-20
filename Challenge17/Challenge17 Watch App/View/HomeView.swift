@@ -27,13 +27,13 @@ struct HomeView: View {
                         .foregroundStyle(.yellow.opacity(0.9))
                         .fontWeight(.bold)
                 }
-                    
+
             }
-            
+
             Spacer()
-            
+
             Button{
-                gameViewModel.start()
+                gameViewModel.prepareToPlay()
             } label: {
                 Image(systemName: "play.fill")
                     .foregroundStyle(.black)
@@ -43,17 +43,17 @@ struct HomeView: View {
             .background(.purple)
             .clipShape(Circle())
             .shadow(color: .purple, radius: 10)
-            
+
             HStack {
                 Button {
-                    
+
                 } label: {
                     Image(systemName: "questionmark")
                 }
                 .buttonStyle(.plain)
                 .padding()
                 .overlay(Circle().stroke(.gray))
-                
+
                 Spacer()
             }
         }

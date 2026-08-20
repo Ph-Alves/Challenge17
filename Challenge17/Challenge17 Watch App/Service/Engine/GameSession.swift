@@ -14,6 +14,7 @@ enum GameEvent: Equatable {
     case hideDirection
     case waitingForInput
     case correctInput
+    case roundCompleted
     case gameOver
 }
 
@@ -43,8 +44,8 @@ final class GameSession: GameSessionProtocol {
 
     init(
         engine: GameEngine = GameEngine(),
-        highlightDuration: Duration = .milliseconds(500),
-        gapDuration: Duration = .milliseconds(500)
+        highlightDuration: Duration = .milliseconds(1000),
+        gapDuration: Duration = .milliseconds(1000)
     ) {
         self.engine = engine
         self.highlightDuration = highlightDuration
@@ -72,7 +73,13 @@ final class GameSession: GameSessionProtocol {
             delegate?.onEvent(.correctInput)
 
         case .completed:
-            startNextRound()
+            delegate?.onEvent(.roundCompleted)
+            
+            playbackTask?.cancel()
+            playbackTask = Task { @MainActor [weak self] in
+                try? await Task.sleep(for: .milliseconds(1200))
+                self?.startNextRound()
+            }
 
         case .incorrect:
             playbackTask?.cancel()

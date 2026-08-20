@@ -18,6 +18,7 @@ final class GameViewModel {
     private(set) var workoutResult: WorkoutResult?
     private(set) var highScoreRound: Int
     private(set) var totalCaloriesBurned: Int
+    private(set) var isRoundCompleted: Bool = false
     private(set) var hasFinishedOnboarding: Bool
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
@@ -57,7 +58,6 @@ final class GameViewModel {
             guard state == .waiting else { return }
             
             self.gameSession.receive(direction)
-            self.coreMotionManager.stopCapturing()
         }
         
         self.gameSession.delegate = self
@@ -72,6 +72,23 @@ final class GameViewModel {
         workoutResult = nil
         workoutManager.startWorkout()
         state = .running
+    }
+    
+    func prepareToPlay() {
+        resetGameData()
+        state = .running
+    }
+    
+    func pauseGame() {
+        if state == .waiting {
+            coreMotionManager.stopCapturing()
+        }
+    }
+    
+    func resumeGame() {
+        if state == .waiting {
+            coreMotionManager.captureMoves()
+        }
     }
     
     func stop() {
@@ -117,6 +134,7 @@ extension GameViewModel: GameSessionDelegate {
             round = currentRound
             scoreRepository.updateHighScoreRound(currentRound)
             highScoreRound = scoreRepository.highScoreRound
+            isRoundCompleted = false
             coreMotionManager.stopCapturing()
             state = .running
             
@@ -134,6 +152,10 @@ extension GameViewModel: GameSessionDelegate {
             hapticService.playSuccess()
             coreMotionManager.captureMoves()
             
+        case .roundCompleted:
+            isRoundCompleted = true
+            coreMotionManager.stopCapturing()
+            
         case .gameOver:
             highlightedDirection = nil
             state = .finished
@@ -144,6 +166,7 @@ extension GameViewModel: GameSessionDelegate {
     
     private func resetGameData() {
         highlightedDirection = nil
+        isRoundCompleted = false
         round = 0
         lastMotionSample = nil
     }
