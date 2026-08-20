@@ -72,13 +72,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		634615EB3034EF6100D6117C /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Challenge17-Watch-App-Info.plist",
-			);
-			target = EFBAFE9C30338016009B0AF4 /* Challenge17 Watch App */;
-		};
 		A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -107,7 +100,6 @@
 		EFBAFEA130338016009B0AF4 /* Challenge17 Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				634615EB3034EF6100D6117C /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch App" target */,
 				A013B8DF3033C9D40039EFA1 /* Exceptions for "Challenge17 Watch App" folder in "Challenge17 Watch AppTests" target */,
 			);
 			path = "Challenge17 Watch App";
@@ -582,6 +574,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Challenge17 Watch App/Challenge17 Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 29HC4SA3R9;
@@ -589,6 +582,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Our app need permission to collect your heart rate and calorie spense during activities to show after the workout.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Our app needs your permission to save your workout to the health app.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -616,6 +611,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Challenge17 Watch App/Challenge17 Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 29HC4SA3R9;
@@ -623,6 +619,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Our app need permission to collect your heart rate and calorie spense during activities to show after the workout.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Our app needs your permission to save your workout to the health app.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

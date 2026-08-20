@@ -2,7 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMotionUsageDescription</key>
-	<string>Usamos os sensores de movimento do Apple Watch para detectar os gestos do seu pulso durante o jogo.</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>UIBackgroundModes</key>
+	<array/>
+	<key>WKBackgroundModes</key>
+	<array>
+		<string>mindfulness</string>
+		<string>workout-processing</string>
+	</array>
 </dict>
 </plist>

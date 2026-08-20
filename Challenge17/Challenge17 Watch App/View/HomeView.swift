@@ -8,23 +8,65 @@
 import SwiftUI
 
 struct HomeView: View {
-    let vm: GameViewModel
+    let gameViewModel: GameViewModel
     
     var body: some View {
         VStack {
-            Button("Play") {
-                vm.start()
+            HStack() {
+                VStack(alignment: .leading) {
+                    Text("Recorde:")
+                        .foregroundStyle(.gray)
+                    // Puxar recorde da vm aqui.
+                    Text("\(10)")
+                        .fontWeight(.bold)
+                }
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Calorias:")
+                        .foregroundStyle(.gray)
+                    // Puxar calorias da VM aqui
+                    Text("\(10)")
+                        .foregroundStyle(.yellow.opacity(0.9))
+                        .fontWeight(.bold)
+                }
+                    
+            }
+            
+            Spacer()
+            
+            Button{
+                gameViewModel.start()
+            } label: {
+                Image(systemName: "play.fill")
+                    .foregroundStyle(.black)
+            }
+            .buttonStyle(.plain)
+            .padding(20)
+            .background(.purple)
+            .clipShape(Circle())
+            .shadow(color: .purple, radius: 10)
+            
+            HStack {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "questionmark")
+                }
+                .buttonStyle(.plain)
+                .padding()
+                .overlay(Circle().stroke(.gray))
+                
+                Spacer()
             }
         }
-        .padding()
     }
 }
 
 #Preview {
     HomeView(
-        vm: GameViewModel(
+        gameViewModel: GameViewModel(
             gameSession: GameSession(),
-            coreMotionManager: CoreMotionManagerMock()
+            coreMotionManager: CoreMotionManagerMock(), workoutManager: WorkoutManager()
         )
     )
 }
