@@ -6,6 +6,7 @@
 //
 
 import Observation
+import Foundation
 
 @Observable
 final class GameViewModel {
@@ -17,6 +18,10 @@ final class GameViewModel {
     private(set) var workoutResult: WorkoutResult?
     private(set) var highScoreRound: Int
     private(set) var totalCaloriesBurned: Int
+    
+    var completedOnboarding: Bool = UserDefaults.standard.bool(forKey: "onboardingCompleted") {
+        didSet { UserDefaults.standard.set(completedOnboarding, forKey: "onboardingCompleted") }
+    }
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
