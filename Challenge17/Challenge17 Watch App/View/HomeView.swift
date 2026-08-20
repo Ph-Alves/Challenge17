@@ -66,7 +66,7 @@ struct HomeView: View {
     HomeView(
         gameViewModel: GameViewModel(
             gameSession: GameSession(),
-            coreMotionManager: CoreMotionManagerMock()
+            coreMotionManager: CoreMotionManagerMock(), workoutManager: WorkoutManager()
         )
     )
 }
