@@ -9,9 +9,23 @@ import SwiftUI
 
 struct GameOverView: View {
     let vm: GameViewModel
+    
 
     var body: some View {
         VStack(spacing: 8) {
+            HStack {
+                Text("Rounds: \(vm.round)")
+                
+                Text("Kcal: \(vm.workoutResult?.calories.formatted(.number.precision(.fractionLength(0))) ?? "0")")
+            }
+            
+            HStack {
+                Text("Time: \(Int(vm.workoutResult?.duration ?? 0)/60) : \(Int(vm.workoutResult?.duration ?? 0)%60)")
+                
+                Text("HR: \(vm.workoutResult?.duration.formatted(.number.precision(.fractionLength(0))) ?? "0") BPM")
+                
+            }
+            
             Text("Game Over")
 
             Button("Home") {
@@ -26,7 +40,9 @@ struct GameOverView: View {
     GameOverView(
         vm: GameViewModel(
             gameSession: GameSession(),
-            coreMotionManager: CoreMotionManagerMock()
+            coreMotionManager: CoreMotionManagerMock(),
+            workoutManager: WorkoutManager(),
+            scoreRepository: ScoreRepository()
         )
     )
 }

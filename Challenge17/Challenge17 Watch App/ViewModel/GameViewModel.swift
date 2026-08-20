@@ -13,11 +13,15 @@ final class GameViewModel {
     private(set) var highlightedDirection: GameDirection?
     private(set) var state: GameState = .idle
     private(set) var round: Int = 0
-    
-    var lastMotionSample: MotionSample?
+    private(set) var lastMotionSample: MotionSample?
+    private(set) var workoutResult: WorkoutResult?
+    private(set) var highScoreRound: Int
+    private(set) var totalCaloriesBurned: Int
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
+    @ObservationIgnored private let workoutManager: WorkoutManagerProtocol
+    @ObservationIgnored private let scoreRepository: ScoreRepositoryProtocol
 
     enum GameState {
         case idle
@@ -26,9 +30,19 @@ final class GameViewModel {
         case finished
     }
 
-    init(gameSession: GameSessionProtocol, coreMotionManager: CoreMotionManagerProtocol) {
+    init(
+        gameSession: GameSessionProtocol,
+        coreMotionManager: CoreMotionManagerProtocol,
+        workoutManager: WorkoutManagerProtocol,
+        scoreRepository: ScoreRepositoryProtocol
+    ) {
         self.gameSession = gameSession
         self.coreMotionManager = coreMotionManager
+        self.workoutManager = workoutManager
+        self.scoreRepository = scoreRepository
+        self.highScoreRound = scoreRepository.highScoreRound
+        self.totalCaloriesBurned = scoreRepository.totalCaloriesBurned
+        
         self.coreMotionManager.onMotionSample = { [weak self] sample in
             self?.lastMotionSample = sample
         }
@@ -41,17 +55,26 @@ final class GameViewModel {
         }
         
         self.gameSession.delegate = self
+        
+        
     }
 
     func start() {
         resetGameData()
         gameSession.start()
+        
+        workoutResult = nil
+        workoutManager.startWorkout()
         state = .running
     }
     
     func stop() {
         gameSession.stop()
         coreMotionManager.stopCapturing()
+        workoutManager.stopWorkout()
+        
+        workoutResult = workoutManager.workoutResult
+        syncStoredProgress()
     }
 
     func showHome() {
@@ -82,6 +105,8 @@ extension GameViewModel: GameSessionDelegate {
         switch event {
         case .roundStarted(let currentRound):
             round = currentRound
+            scoreRepository.updateHighScoreRound(currentRound)
+            highScoreRound = scoreRepository.highScoreRound
             coreMotionManager.stopCapturing()
             state = .running
             
@@ -109,5 +134,14 @@ extension GameViewModel: GameSessionDelegate {
         highlightedDirection = nil
         round = 0
         lastMotionSample = nil
+    }
+
+    private func syncStoredProgress() {
+        if let calories = workoutResult?.calories, calories > 0 {
+            scoreRepository.addCaloriesBurned(Int(calories))
+        }
+
+        highScoreRound = scoreRepository.highScoreRound
+        totalCaloriesBurned = scoreRepository.totalCaloriesBurned
     }
 }

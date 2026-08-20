@@ -16,16 +16,14 @@ struct HomeView: View {
                 VStack(alignment: .leading) {
                     Text("Recorde:")
                         .foregroundStyle(.gray)
-                    // Puxar recorde da vm aqui.
-                    Text("\(10)")
+                    Text("\(gameViewModel.highScoreRound)")
                         .fontWeight(.bold)
                 }
                 Spacer()
                 VStack(alignment: .leading) {
                     Text("Calorias:")
                         .foregroundStyle(.gray)
-                    // Puxar calorias da VM aqui
-                    Text("\(10)")
+                    Text("\(gameViewModel.totalCaloriesBurned)")
                         .foregroundStyle(.yellow.opacity(0.9))
                         .fontWeight(.bold)
                 }
@@ -66,7 +64,9 @@ struct HomeView: View {
     HomeView(
         gameViewModel: GameViewModel(
             gameSession: GameSession(),
-            coreMotionManager: CoreMotionManagerMock()
+            coreMotionManager: CoreMotionManagerMock(),
+            workoutManager: WorkoutManager(),
+            scoreRepository: ScoreRepository()
         )
     )
 }
