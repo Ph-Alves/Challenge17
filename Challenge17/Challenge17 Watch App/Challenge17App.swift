@@ -13,7 +13,8 @@ struct Challenge17_Watch_AppApp: App {
         gameSession: GameSession(),
         coreMotionManager: CoreMotionManager(),
         workoutManager: WorkoutManager(),
-        scoreRepository: ScoreRepository()
+        scoreRepository: ScoreRepository(),
+        hapticService: HapticService()
     )
 
     var body: some Scene {

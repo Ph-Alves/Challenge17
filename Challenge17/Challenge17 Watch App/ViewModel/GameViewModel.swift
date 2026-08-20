@@ -22,6 +22,7 @@ final class GameViewModel {
     @ObservationIgnored private let gameSession: GameSessionProtocol
     @ObservationIgnored private let workoutManager: WorkoutManagerProtocol
     @ObservationIgnored private let scoreRepository: ScoreRepositoryProtocol
+    @ObservationIgnored private let hapticService: HapticServiceProtocol
 
     enum GameState {
         case idle
@@ -34,12 +35,14 @@ final class GameViewModel {
         gameSession: GameSessionProtocol,
         coreMotionManager: CoreMotionManagerProtocol,
         workoutManager: WorkoutManagerProtocol,
-        scoreRepository: ScoreRepositoryProtocol
+        scoreRepository: ScoreRepositoryProtocol,
+        hapticService: HapticServiceProtocol
     ) {
         self.gameSession = gameSession
         self.coreMotionManager = coreMotionManager
         self.workoutManager = workoutManager
         self.scoreRepository = scoreRepository
+        self.hapticService = hapticService
         self.highScoreRound = scoreRepository.highScoreRound
         self.totalCaloriesBurned = scoreRepository.totalCaloriesBurned
         
@@ -121,12 +124,14 @@ extension GameViewModel: GameSessionDelegate {
             coreMotionManager.captureMoves()
             
         case .correctInput:
+            hapticService.playSuccess()
             coreMotionManager.captureMoves()
             
         case .gameOver:
             highlightedDirection = nil
             state = .finished
             coreMotionManager.stopCapturing()
+            hapticService.playFailure()
         }
     }
     
