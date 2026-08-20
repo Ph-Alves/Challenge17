@@ -8,28 +8,33 @@
 import Foundation
 
 struct MotionThreshold {
-    static let accelerationThreshold: Double = 0.5 //g's
-    static let rotationThreshold: Double = 1.0 //rad's
+    static let attitudeThreshold: Double = 0.4 // Radianos (~23 graus)
     
     static func direction(for sample: MotionSample) -> GameDirection? {
-        if let direction = dominantDirection(x: sample.acceleration.x,
-                                             y: sample.acceleration.y,
-                                             threshold: accelerationThreshold) {
-            return direction
-        }
-        return dominantDirection(x: sample.rotationRate.x,
-                                 y: sample.rotationRate.y,
-                                 threshold: rotationThreshold)
-    }
-    
-    private static func dominantDirection(x: Double, y: Double, threshold: Double) -> GameDirection? {
-        let absX = abs(x)
-        let absY = abs(y)
-        guard max(absX, absY) >= threshold else { return nil }
-        if absY >= absX {
-            return y < 0 ? .up : .down
+        let pitch = sample.attitude.x
+        let roll = sample.attitude.y
+        
+        let absPitch = abs(pitch)
+        let absRoll = abs(roll)
+        
+        guard max(absPitch, absRoll) >= attitudeThreshold else { return nil }
+        
+        // Margem de segurança: O eixo de inclinação secundário deve ser menor que 40% do principal
+        // Isso exige movimentos mais 'limpos' e isolados
+        let marginFactor = 0.4
+        
+        if absPitch > absRoll {
+            // Eixo Vertical (Pitch)
+            if absRoll < absPitch * marginFactor {
+                return pitch < 0 ? .up : .down
+            }
         } else {
-            return x > 0 ? .right : .left
+            // Eixo Horizontal (Roll)
+            if absPitch < absRoll * marginFactor {
+                return roll > 0 ? .right : .left
+            }
         }
+        
+        return nil
     }
 }

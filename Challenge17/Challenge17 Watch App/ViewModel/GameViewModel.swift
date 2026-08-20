@@ -60,7 +60,6 @@ final class GameViewModel {
             guard state == .waiting else { return }
             
             self.gameSession.receive(direction)
-            self.coreMotionManager.stopCapturing()
         }
         
         self.gameSession.delegate = self
