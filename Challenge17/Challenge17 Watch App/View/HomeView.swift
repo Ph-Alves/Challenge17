@@ -66,7 +66,8 @@ struct HomeView: View {
             gameSession: GameSession(),
             coreMotionManager: CoreMotionManagerMock(),
             workoutManager: WorkoutManager(),
-            scoreRepository: ScoreRepository()
+            scoreRepository: ScoreRepository(),
+            hapticService: HapticService()
         )
     )
 }

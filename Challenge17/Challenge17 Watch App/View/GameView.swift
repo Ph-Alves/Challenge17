@@ -24,7 +24,8 @@ struct GameView: View {
             gameSession: GameSession(),
             coreMotionManager: CoreMotionManager(),
             workoutManager: WorkoutManager(),
-            scoreRepository: ScoreRepository()
+            scoreRepository: ScoreRepository(),
+            hapticService: HapticService()
         )
     )
 }
