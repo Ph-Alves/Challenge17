@@ -50,6 +50,13 @@ final class CoreMotionManager: CoreMotionManagerProtocol {
                 return
             }
             self.lastEmittedAt = now
+            
+            print("--- Motion Detected ---")
+            print("Direction: \(direction)")
+            print("Acceleration - x: \(String(format: "%.2f", sample.acceleration.x)), y: \(String(format: "%.2f", sample.acceleration.y)), z: \(String(format: "%.2f", sample.acceleration.z))")
+            print("Rotation - x: \(String(format: "%.2f", sample.rotationRate.x)), y: \(String(format: "%.2f", sample.rotationRate.y)), z: \(String(format: "%.2f", sample.rotationRate.z))")
+            print("-----------------------")
+            
             self.onDirectionDetected?(direction)
         }
     }

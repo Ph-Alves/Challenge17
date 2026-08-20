@@ -18,6 +18,7 @@ final class GameViewModel {
     private(set) var workoutResult: WorkoutResult?
     private(set) var highScoreRound: Int
     private(set) var totalCaloriesBurned: Int
+    private(set) var isRoundCompleted: Bool = false
     
     var completedOnboarding: Bool = UserDefaults.standard.bool(forKey: "onboardingCompleted") {
         didSet { UserDefaults.standard.set(completedOnboarding, forKey: "onboardingCompleted") }
@@ -76,6 +77,23 @@ final class GameViewModel {
         state = .running
     }
     
+    func prepareToPlay() {
+        resetGameData()
+        state = .running
+    }
+    
+    func pauseGame() {
+        if state == .waiting {
+            coreMotionManager.stopCapturing()
+        }
+    }
+    
+    func resumeGame() {
+        if state == .waiting {
+            coreMotionManager.captureMoves()
+        }
+    }
+    
     func stop() {
         gameSession.stop()
         coreMotionManager.stopCapturing()
@@ -115,6 +133,7 @@ extension GameViewModel: GameSessionDelegate {
             round = currentRound
             scoreRepository.updateHighScoreRound(currentRound)
             highScoreRound = scoreRepository.highScoreRound
+            isRoundCompleted = false
             coreMotionManager.stopCapturing()
             state = .running
             
@@ -132,6 +151,10 @@ extension GameViewModel: GameSessionDelegate {
             hapticService.playSuccess()
             coreMotionManager.captureMoves()
             
+        case .roundCompleted:
+            isRoundCompleted = true
+            coreMotionManager.stopCapturing()
+            
         case .gameOver:
             highlightedDirection = nil
             state = .finished
@@ -142,6 +165,7 @@ extension GameViewModel: GameSessionDelegate {
     
     private func resetGameData() {
         highlightedDirection = nil
+        isRoundCompleted = false
         round = 0
         lastMotionSample = nil
     }
