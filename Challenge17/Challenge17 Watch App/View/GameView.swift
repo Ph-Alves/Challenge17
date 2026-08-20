@@ -19,5 +19,12 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView(vm: GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager(), workoutManager: WorkoutManager()))
+    GameView(
+        vm: GameViewModel(
+            gameSession: GameSession(),
+            coreMotionManager: CoreMotionManager(),
+            workoutManager: WorkoutManager(),
+            scoreRepository: ScoreRepository()
+        )
+    )
 }

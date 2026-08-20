@@ -40,7 +40,9 @@ struct GameOverView: View {
     GameOverView(
         vm: GameViewModel(
             gameSession: GameSession(),
-            coreMotionManager: CoreMotionManagerMock(), workoutManager: WorkoutManager()
+            coreMotionManager: CoreMotionManagerMock(),
+            workoutManager: WorkoutManager(),
+            scoreRepository: ScoreRepository()
         )
     )
 }
