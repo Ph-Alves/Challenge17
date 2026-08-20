@@ -14,15 +14,20 @@ final class GameViewModel {
     private(set) var highlightedDirection: GameDirection?
     private(set) var state: GameState = .idle
     private(set) var round: Int = 0
+    private(set) var lastMotionSample: MotionSample?
+    private(set) var workoutResult: WorkoutResult?
+    private(set) var highScoreRound: Int
+    private(set) var totalCaloriesBurned: Int
     
     var completedOnboarding: Bool = UserDefaults.standard.bool(forKey: "onboardingCompleted") {
         didSet { UserDefaults.standard.set(completedOnboarding, forKey: "onboardingCompleted") }
     }
     
-    var lastMotionSample: MotionSample?
-    
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
+    @ObservationIgnored private let workoutManager: WorkoutManagerProtocol
+    @ObservationIgnored private let scoreRepository: ScoreRepositoryProtocol
+    @ObservationIgnored private let hapticService: HapticServiceProtocol
 
     enum GameState {
         case idle
@@ -31,9 +36,21 @@ final class GameViewModel {
         case finished
     }
 
-    init(gameSession: GameSessionProtocol, coreMotionManager: CoreMotionManagerProtocol) {
+    init(
+        gameSession: GameSessionProtocol,
+        coreMotionManager: CoreMotionManagerProtocol,
+        workoutManager: WorkoutManagerProtocol,
+        scoreRepository: ScoreRepositoryProtocol,
+        hapticService: HapticServiceProtocol
+    ) {
         self.gameSession = gameSession
         self.coreMotionManager = coreMotionManager
+        self.workoutManager = workoutManager
+        self.scoreRepository = scoreRepository
+        self.hapticService = hapticService
+        self.highScoreRound = scoreRepository.highScoreRound
+        self.totalCaloriesBurned = scoreRepository.totalCaloriesBurned
+        
         self.coreMotionManager.onMotionSample = { [weak self] sample in
             self?.lastMotionSample = sample
         }
@@ -46,17 +63,26 @@ final class GameViewModel {
         }
         
         self.gameSession.delegate = self
+        
+        
     }
 
     func start() {
         resetGameData()
         gameSession.start()
+        
+        workoutResult = nil
+        workoutManager.startWorkout()
         state = .running
     }
     
     func stop() {
         gameSession.stop()
         coreMotionManager.stopCapturing()
+        workoutManager.stopWorkout()
+        
+        workoutResult = workoutManager.workoutResult
+        syncStoredProgress()
     }
 
     func showHome() {
@@ -87,6 +113,8 @@ extension GameViewModel: GameSessionDelegate {
         switch event {
         case .roundStarted(let currentRound):
             round = currentRound
+            scoreRepository.updateHighScoreRound(currentRound)
+            highScoreRound = scoreRepository.highScoreRound
             coreMotionManager.stopCapturing()
             state = .running
             
@@ -101,12 +129,14 @@ extension GameViewModel: GameSessionDelegate {
             coreMotionManager.captureMoves()
             
         case .correctInput:
+            hapticService.playSuccess()
             coreMotionManager.captureMoves()
             
         case .gameOver:
             highlightedDirection = nil
             state = .finished
             coreMotionManager.stopCapturing()
+            hapticService.playFailure()
         }
     }
     
@@ -114,5 +144,14 @@ extension GameViewModel: GameSessionDelegate {
         highlightedDirection = nil
         round = 0
         lastMotionSample = nil
+    }
+
+    private func syncStoredProgress() {
+        if let calories = workoutResult?.calories, calories > 0 {
+            scoreRepository.addCaloriesBurned(Int(calories))
+        }
+
+        highScoreRound = scoreRepository.highScoreRound
+        totalCaloriesBurned = scoreRepository.totalCaloriesBurned
     }
 }

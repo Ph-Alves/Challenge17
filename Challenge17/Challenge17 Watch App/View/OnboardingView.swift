@@ -131,5 +131,5 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView(gameViewModel: GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager()))
+    OnboardingView(gameViewModel: GameViewModel(gameSession: GameSession(), coreMotionManager: CoreMotionManager(), workoutManager: WorkoutManager(), scoreRepository: ScoreRepository(), hapticService: HapticService()))
 }

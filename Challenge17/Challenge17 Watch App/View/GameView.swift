@@ -13,12 +13,6 @@ struct GameView: View {
     var body: some View {
         VStack {
             Text("Our Game")
-
-            Text("Round: \(vm.round)")
-            
-            Button("End Game") {
-                vm.showGameOver()
-            }
         }
         .padding()
     }
@@ -28,7 +22,10 @@ struct GameView: View {
     GameView(
         vm: GameViewModel(
             gameSession: GameSession(),
-            coreMotionManager: CoreMotionManagerMock()
+            coreMotionManager: CoreMotionManager(),
+            workoutManager: WorkoutManager(),
+            scoreRepository: ScoreRepository(),
+            hapticService: HapticService()
         )
     )
 }
