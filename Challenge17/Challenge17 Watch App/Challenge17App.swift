@@ -12,7 +12,8 @@ struct Challenge17_Watch_AppApp: App {
     @State private var vm = GameViewModel(
         gameSession: GameSession(),
         coreMotionManager: CoreMotionManager(),
-        workoutManager: WorkoutManager()
+        workoutManager: WorkoutManager(),
+        scoreRepository: ScoreRepository()
     )
 
     var body: some Scene {
