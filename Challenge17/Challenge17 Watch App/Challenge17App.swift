@@ -21,7 +21,7 @@ struct Challenge17_Watch_AppApp: App {
         WindowGroup {
             switch vm.state {
             case .idle:
-                if vm.completedOnboarding {
+                if vm.hasFinishedOnboarding {
                     HomeView(gameViewModel: vm)
                         .background(Color.viewBckg)
                 } else {
