@@ -22,17 +22,17 @@ struct Challenge17_Watch_AppApp: App {
             switch vm.state {
             case .onBoarding:
                 OnboardingView(gameViewModel: vm)
-                    .background(Color.viewBckg)
+                    .background(Color.viewBckg.ignoresSafeArea())
             case .idle:
                 HomeView(gameViewModel: vm)
-                    .background(Color.viewBckg)
+                    .background(Color.viewBckg.ignoresSafeArea())
             case .running, .waiting:
                 GameView(vm: vm)
-                    .background(Color.viewBckg)
+                    .background(Color.viewBckg.ignoresSafeArea())
 
             case .finished:
                 GameOverView(vm: vm)
-                    .background(Color.viewBckg)
+                    .background(Color.viewBckg.ignoresSafeArea())
             }
         }
     }

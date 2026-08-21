@@ -389,7 +389,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppComplications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AppComplications;
@@ -401,7 +401,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitapppp.AppComplications;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitappp.AppComplications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -422,7 +422,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppComplications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AppComplications;
@@ -434,7 +434,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitapppp.AppComplications;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitappp.AppComplications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -577,7 +577,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Challenge17 Watch App/Challenge17 Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
@@ -591,7 +591,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitapppp;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitappp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -614,7 +614,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Challenge17 Watch App/Challenge17 Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge17-Watch-App-Info.plist";
@@ -628,7 +628,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitapppp;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17.watchkitappp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -649,7 +649,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17;
@@ -666,7 +666,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				INFOPLIST_KEY_CFBundleDisplayName = Challenge17;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.paulo.Challenge17;
@@ -685,7 +685,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.paulo.Challenge17-Watch-AppTests";
@@ -708,7 +708,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 379RD95483;
+				DEVELOPMENT_TEAM = A98HC555P6;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.paulo.Challenge17-Watch-AppTests";

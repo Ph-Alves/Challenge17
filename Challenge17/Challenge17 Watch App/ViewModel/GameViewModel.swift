@@ -19,6 +19,7 @@ final class GameViewModel {
     private(set) var highScoreRound: Int
     private(set) var totalCaloriesBurned: Int
     private(set) var isRoundCompleted: Bool = false
+    private(set) var isRoundFailed: Bool = false
     private(set) var hasFinishedOnboarding: Bool
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
@@ -188,24 +189,24 @@ extension GameViewModel: GameSessionDelegate {
             
         case .gameOver:
             highlightedDirection = nil
+            isRoundFailed = true
             coreMotionManager.stopCapturing()
             hapticService.playFailure()
 
-            workoutManager.stopWorkout { [weak self] result in
-                guard let self else { return }
-                
-                Task { @MainActor in
-                    self.workoutResult = result
-                    self.syncStoredProgress()
-                    self.state = .finished
+            Task {
+                try? await Task.sleep(for: .milliseconds(1200))
+                await MainActor.run {
+                    self.isRoundFailed = false
+                    self.showGameOver()
                 }
             }
         }
     }
-    
+
     private func resetGameData() {
         highlightedDirection = nil
         isRoundCompleted = false
+        isRoundFailed = false
         round = 0
         lastMotionSample = nil
     }
