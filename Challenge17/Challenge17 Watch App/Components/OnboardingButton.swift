@@ -28,4 +28,7 @@ struct OnboardingButton: View {
 
 #Preview {
     OnboardingButton(buttonImage: "chevron.right", action: {})
+    OnboardingButton(buttonImage: "checkmark") {
+        
+    }
 }

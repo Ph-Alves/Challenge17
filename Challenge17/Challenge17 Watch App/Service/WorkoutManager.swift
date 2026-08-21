@@ -20,7 +20,7 @@ protocol WorkoutManagerProtocol: AnyObject {
     func askHealthPermission()
     
     func startWorkout()
-    func stopWorkout()
+    func stopWorkout(completion: @escaping (WorkoutResult?) -> Void)
 }
 
 
@@ -29,6 +29,7 @@ final class WorkoutManager: NSObject, WorkoutManagerProtocol, HKWorkoutSessionDe
     
     }
     
+    private var stopCompletion: ((WorkoutResult?) -> Void)?
     private(set) var workoutResult: WorkoutResult?
     private(set) var currentHeartRate: Double = 0
     private(set) var currentCalories: Double = 0
@@ -120,7 +121,7 @@ final class WorkoutManager: NSObject, WorkoutManagerProtocol, HKWorkoutSessionDe
                     return
                 }
 
-                print("Workout started: true")
+                print("Workout started")
             }
             
         } catch {
@@ -128,9 +129,20 @@ final class WorkoutManager: NSObject, WorkoutManagerProtocol, HKWorkoutSessionDe
         }
     }
     
-    func stopWorkout() {
-        workoutSession?.end()
-        print("Workout stopped")
+    func stopWorkout(completion: @escaping (WorkoutResult?) -> Void) {
+        stopCompletion = completion
+        
+        guard let session = workoutSession else {
+            print("❌ Nenhuma sessão ativa")
+            completion(nil)
+            stopCompletion = nil
+            return
+        }
+
+        print("🛑 Parando workout...")
+        print("Estado atual:", session.state.rawValue)
+
+        session.end()
     }
 }
 
@@ -235,8 +247,17 @@ extension WorkoutManager: HKLiveWorkoutBuilderDelegate {
                     .averageQuantity()?
                     .doubleValue(for: HKUnit.count().unitDivided(by: .minute())) ?? 0
                 
+                
+                let result = WorkoutResult(
+                    duration: duration,
+                    calories: calories,
+                    heartRate: heartRate
+                )
+
                 DispatchQueue.main.async {
-                    self.workoutResult = WorkoutResult(duration: duration, calories: calories, heartRate: heartRate)
+                    self.workoutResult = result
+                    self.stopCompletion?(result)
+                    self.stopCompletion = nil
                 }
             }
 
