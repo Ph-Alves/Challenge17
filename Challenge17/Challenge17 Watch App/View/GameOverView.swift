@@ -18,7 +18,7 @@ struct GameOverView: View {
                     Text("BPM")
                         .font(.footnote)
                         .fontWeight(.semibold)
-                    Text("\(vm.workoutResult?.duration.formatted(.number.precision(.fractionLength(0))) ?? "0")")
+                    Text("\(vm.workoutResult?.heartRate.formatted(.number.precision(.fractionLength(0))) ?? "0")")
                         .bold()
                         .foregroundStyle(Color.red)
                 }

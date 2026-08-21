@@ -87,7 +87,7 @@ struct OnboardingView: View {
                 }
             case 3:
                 VStack {
-                    Text("Movimente o braço na direção da seta!")
+                    Text("Movimente o braço na direção da seta")
                         .multilineTextAlignment(.center)
                     HStack {
                         Spacer()
@@ -120,6 +120,30 @@ struct OnboardingView: View {
                         Spacer()
                         
                         OnboardingButton(buttonImage: "chevron.right", action: {
+                            step += 1
+                        })
+                    }
+                }
+            case 4:
+                VStack {
+                    Text("Necessitamos da sua permissão para coletar dados de saúde")
+                        .font(.caption)
+                    
+                    Button("Conceder Permissão") {
+                        gameViewModel.workoutManager.askHealthPermission()
+                    }
+                    
+                    Spacer()
+                    
+                    
+                    HStack {
+                        OnboardingButton(buttonImage: "chevron.left", action: {
+                            step -= 1
+                        })
+                        
+                        Spacer()
+                        
+                        OnboardingButton(buttonImage: "checkmark", action: {
                             gameViewModel.completedOnboarding(true)
                             gameViewModel.showHome()
                         })
