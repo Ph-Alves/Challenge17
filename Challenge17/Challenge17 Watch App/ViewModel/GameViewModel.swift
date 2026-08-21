@@ -23,7 +23,7 @@ final class GameViewModel {
     
     @ObservationIgnored private let coreMotionManager: CoreMotionManagerProtocol
     @ObservationIgnored private let gameSession: GameSessionProtocol
-    @ObservationIgnored private let workoutManager: WorkoutManagerProtocol
+    @ObservationIgnored public let workoutManager: WorkoutManagerProtocol
     @ObservationIgnored private let scoreRepository: ScoreRepositoryProtocol
     @ObservationIgnored private let hapticService: HapticServiceProtocol
 
@@ -105,10 +105,15 @@ final class GameViewModel {
     func stop() {
         gameSession.stop()
         coreMotionManager.stopCapturing()
-        workoutManager.stopWorkout()
-        
-        workoutResult = workoutManager.workoutResult
-        syncStoredProgress()
+
+        workoutManager.stopWorkout { [weak self] result in
+            guard let self else { return }
+
+            Task { @MainActor in
+                self.workoutResult = result
+                self.syncStoredProgress()
+            }
+        }
     }
 
     func showHome() {
@@ -118,8 +123,22 @@ final class GameViewModel {
     }
 
     func showGameOver() {
-        stop()
-        state = .finished
+        gameSession.stop()
+        coreMotionManager.stopCapturing()
+        hapticService.playFailure()
+
+        workoutManager.stopWorkout { [weak self] result in
+            guard let self else { return }
+
+            Task { @MainActor in
+                self.workoutResult = result
+                self.syncStoredProgress()
+
+                // Só entra na tela de Game Over
+                // depois que o HealthKit terminou.
+                self.state = .finished
+            }
+        }
     }
     
     func completedOnboarding(_ completed: Bool) {
@@ -169,9 +188,18 @@ extension GameViewModel: GameSessionDelegate {
             
         case .gameOver:
             highlightedDirection = nil
-            state = .finished
             coreMotionManager.stopCapturing()
             hapticService.playFailure()
+
+            workoutManager.stopWorkout { [weak self] result in
+                guard let self else { return }
+                
+                Task { @MainActor in
+                    self.workoutResult = result
+                    self.syncStoredProgress()
+                    self.state = .finished
+                }
+            }
         }
     }
     
