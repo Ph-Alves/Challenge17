@@ -46,11 +46,6 @@ struct GameView: View {
                     
                     if let direction = vm.highlightedDirection {
                         DirectionIcon(direction: direction)
-                    } else if vm.state == .running {
-                        Text("Atenção...")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .frame(height: 60)
                     } else if vm.state == .waiting {
                         Text("Sua Vez!")
                             .font(.title2)
