@@ -16,16 +16,17 @@ struct GameView: View {
     
     var body: some View {
         ZStack {
+            Color.viewBckg
+                .ignoresSafeArea()
+
             if isCountingDown {
-                Text("\(countdown)")
-                    .font(.system(size: 80, weight: .bold))
+                CountdownRingView(countdown: countdown)
                     .onAppear {
                         startCountdown()
                     }
             } else {
                 VStack {
                     HStack {
-                        Spacer()
                         Button(action: {
                             isPaused = true
                             vm.pauseGame()
@@ -34,10 +35,14 @@ struct GameView: View {
                                 .font(.title2)
                         }
                         .buttonStyle(.plain)
+                        
+                        Spacer()
+                        
+                        Text("Round: \(vm.round)")
+                            .font(.headline)
                     }
+                    Spacer()
                     
-                    Text("Round: \(vm.round)")
-                        .font(.headline)
                     
                     if let direction = vm.highlightedDirection {
                         DirectionIcon(direction: direction)
@@ -58,6 +63,7 @@ struct GameView: View {
                             .font(.title2)
                             .frame(height: 60)
                     }
+                    Spacer()
                 }
                 .padding()
             }
@@ -85,19 +91,11 @@ struct GameView: View {
             }
             
             if vm.isRoundCompleted {
-                Color.black.opacity(0.7)
-                    .ignoresSafeArea()
-                
-                VStack {
-                    Image(systemName: "checkmark.circle.fill")
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .foregroundColor(.green)
-                    Text("Passou!")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding(.top, 8)
-                }
+                ResultOverlayView(color: .green, systemImage: "checkmark")
+            }
+
+            if vm.isRoundFailed {
+                ResultOverlayView(color: .red, systemImage: "xmark")
             }
         }
     }
@@ -116,6 +114,68 @@ struct GameView: View {
                 vm.start()
             }
         }
+    }
+}
+
+struct CountdownRingView: View {
+    let countdown: Int
+    private let totalCount = 3
+
+    @State private var progress: CGFloat = 0
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.gray.opacity(0.3), lineWidth: 8)
+
+            Circle()
+                .trim(from: 0, to: progress)
+                .stroke(
+                    Color.purple,
+                    style: StrokeStyle(lineWidth: 8, lineCap: .round)
+                )
+                .rotationEffect(.degrees(-90))
+                .shadow(color: .purple, radius: 6)
+
+            Text("\(countdown)")
+                .font(.system(size: 60, weight: .bold))
+                .foregroundColor(.purple)
+                .shadow(color: .purple, radius: 8)
+        }
+        .frame(width: 130, height: 130)
+        .onAppear {
+            animateProgress()
+        }
+        .onChange(of: countdown) { _, _ in
+            animateProgress()
+        }
+    }
+
+    private func animateProgress() {
+        progress = CGFloat(totalCount - countdown) / CGFloat(totalCount)
+        withAnimation(.linear(duration: 1)) {
+            progress = CGFloat(totalCount - countdown + 1) / CGFloat(totalCount)
+        }
+    }
+}
+
+struct ResultOverlayView: View {
+    let color: Color
+    let systemImage: String
+
+    var body: some View {
+        ZStack {
+            color
+                .ignoresSafeArea()
+
+            Image(systemName: systemImage)
+                .resizable()
+                .scaledToFit()
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: 70, height: 70)
+        }
+        .transition(.opacity)
     }
 }
 
